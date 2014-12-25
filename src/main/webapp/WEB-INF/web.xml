@@ -37,7 +37,7 @@
     </session-config>
     
     <welcome-file-list>
-        <welcome-file>/main</welcome-file>
+        <welcome-file>/WEB-INF/pages/welcome.jsp</welcome-file>
     </welcome-file-list>
     
     <resource-ref>
