@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean name="baseDAO" class="hospital.DAO.BaseDAO" abstract="true">
+        <property name="template" ref="hibernateTemplate" />
+    </bean>
+
+    <bean name="diagnosisDAO" class="hospital.DAO.DiagnosisDAOImpl" parent="baseDAO">
+    </bean>
+
+    <bean name="doctorDAO" class="hospital.DAO.DoctorDAOImpl" parent="baseDAO">
+    </bean>
+
+    <bean name="insurerDAO" class="hospital.DAO.InsurerDAOImpl" parent="baseDAO">
+    </bean>
+
+    <bean name="patientDAO" class="hospital.DAO.PatientDAOImpl" parent="baseDAO">
+    </bean>
+
+    <bean name="diagnosisFacade" parent="abstractTransactionProxy">
+        <property name="target">
+            <bean class="hospital.facade.DiagnosisFacade">
+                <property name="diagnosisDAO" ref="diagnosisDAO" />
+                <property name="patientDAO" ref="patientDAO" />
+                <property name="doctorDAO" ref="doctorDAO" />
+            </bean>
+        </property>
+    </bean>
+
+    <bean name="patientFacade" parent="abstractTransactionProxy">
+        <property name="target">
+            <bean class="hospital.facade.PatientFacade">
+                <property name="patientDAO" ref="patientDAO" />
+                <property name="insurerDAO" ref="insurerDAO" />
+                <property name="diagnosisDAO" ref="diagnosisDAO"/>
+                <property name="diagnosisFacade" ref="diagnosisFacade"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean name="doctorFacade" parent="abstractTransactionProxy">
+        <property name="target">
+            <bean class="hospital.facade.DoctorFacade">
+                <property name="doctorDAO" ref="doctorDAO"/>
+                <property name="diagnosisDAO" ref="diagnosisDAO"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean name="insurerFacade" parent="abstractTransactionProxy">
+        <property name="target">
+            <bean class="hospital.facade.InsurerFacade">
+                <property name="insurerDAO" ref="insurerDAO"/>
+                <property name="patientDAO" ref="patientDAO"/>
+            </bean>
+        </property>
+    </bean>
+</beans>
