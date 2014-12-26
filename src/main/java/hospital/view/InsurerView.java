@@ -22,7 +22,11 @@ public class InsurerView {
     public InsurerView(Insurer i) {
         this.insurerId = i.getInsurerId();
         this.name = i.getName();
-        this.contacts = i.getContacts();
+        if (i.getContacts() == null){
+            this.contacts = "Не указаны";
+        } else {
+            this.contacts = i.getContacts();
+        }
     }
 
     public Long getInsurerId() {

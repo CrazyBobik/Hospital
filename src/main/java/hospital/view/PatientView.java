@@ -21,6 +21,7 @@ public class PatientView {
     private String address;
     private String contacts;
     private Long insurerId;
+    private String insurerName;
     private List<DiagnosisView> diagnosisViewList;
 
     public PatientView() {
@@ -33,10 +34,21 @@ public class PatientView {
     public PatientView(Patient p, boolean full) {
         this.patientId = p.getPatientId();
         this.fio = p.getFio();
-        this.address = p.getAddress();
-        this.contacts = p.getContacts();
+        if (p.getAddress() == null) {
+            this.address = "Не указан";
+        } else {
+            this.address = p.getAddress();
+        }
+        if (p.getContacts() == null){
+            this.contacts = "Не указаны";
+        } else {
+            this.contacts = p.getContacts();
+        }
         if (p.hasInsurer()) {
             this.insurerId = p.getInsurer().getInsurerId();
+            this.insurerName = p.getInsurer().getName();
+        } else {
+            this.insurerName = "Нет страховщика";
         }
         if (full) {
             diagnosisViewList = new LinkedList<DiagnosisView>();
@@ -85,6 +97,14 @@ public class PatientView {
 
     public void setInsurerId(Long insurerId) {
         this.insurerId = insurerId;
+    }
+
+    public String getInsurerName() {
+        return insurerName;
+    }
+
+    public void setInsurerName(String insurerName) {
+        this.insurerName = insurerName;
     }
 
     public List<DiagnosisView> getDiagnosisViewList() {

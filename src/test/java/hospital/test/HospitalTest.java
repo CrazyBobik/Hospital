@@ -51,7 +51,7 @@ public class HospitalTest extends AbstractTransactionalJUnit4SpringContextTests 
         //проверяем редактирование
         insurerView.setContacts(null);
         insurerFacade.updateInsurer(insurerView);
-        Assert.assertTrue(insurerFacade.getInsurer(idInsurer).getContacts() == null);
+        Assert.assertTrue(insurerFacade.getInsurer(idInsurer).getContacts().equals("Не указаны"));
 
         //проверяем добавление доктора
         DoctorView doctorView = new DoctorView();

@@ -11,10 +11,10 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>Приветствуем =)</title>
 </head>
-<body>
-  <H1>Приветствуем в нашей больнице</H1>
-  <form action="/main">
-    <input type="submit" value="Просмотреть карточки пациентов" />
-  </form>
+<body bgcolor="#ffe4c4">
+<font color="#dc143c"><h1 align="center">Приветствуем в нашей больнице</h1></font>
+<form action="/main">
+  <p align="center"><input type="submit" value="Просмотреть карточки пациентов" /></p>
+</form>
 </body>
 </html>
