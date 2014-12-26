@@ -24,8 +24,6 @@ public class PatientController {
     @RequestMapping("/patient")
     public String patientPage(@RequestParam(value = "patientId") String id, ModelMap map){
         PatientView view = patientFacade.getPatient(Long.parseLong(id));
-//        view.setDiagnosisViewList(patientFacade.getDiagnosisesForPatient(view));
-        
         map.addAttribute("patient", view);
         
         return "patient";
