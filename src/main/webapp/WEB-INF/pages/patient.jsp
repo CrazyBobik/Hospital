@@ -36,7 +36,13 @@
   </tr>
   <c:forEach var="diagnosis" items="${patient.diagnosisViewList}">
     <tr>
-      <td>${diagnosis.name}</td>
+      <td>
+        <form action="/patient">
+          <input type="radio" value="${diagnosis.diagnosisId}" name="diagnosisId">
+            ${diagnosis.name}
+          <input type="submit" value="Delete" name="del">
+        </form>
+      </td>
       <td>${diagnosis.text}</td>
       <td>
         <dl>
