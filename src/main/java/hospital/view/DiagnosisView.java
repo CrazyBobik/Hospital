@@ -15,6 +15,8 @@ public class DiagnosisView {
     private Long diagnosisId;
     private Long patientId;
     private Long doctorId;
+    private String doctorName;
+    private String doctorPost;
     private String name;
     private String text;
 
@@ -26,6 +28,8 @@ public class DiagnosisView {
         this.patientId = d.getPatient().getPatientId();
         if (d.hasDoctor()) {
             this.doctorId = d.getDoctor().getDoctorId();
+            this.doctorName = d.getDoctor().getFio();
+            this.doctorPost = d.getDoctor().getPost();
         }
         this.name = d.getName();
         this.text = d.getText();
@@ -53,6 +57,22 @@ public class DiagnosisView {
 
     public void setDoctorId(Long doctorId) {
         this.doctorId = doctorId;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
+    public String getDoctorPost() {
+        return doctorPost;
+    }
+
+    public void setDoctorPost(String doctorPost) {
+        this.doctorPost = doctorPost;
     }
 
     public String getName() {

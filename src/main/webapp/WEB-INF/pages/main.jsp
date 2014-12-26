@@ -23,10 +23,9 @@
     </tr>
     <c:forEach var="patient" items="${patientList}">
       <tr>
-          <%--<td>${patient.patientId}</td>--%>
-        <td><a href="welcome.jsp">${patient.fio}</a></td>
-            <td>${patient.address}</td>
-            <td>${patient.insurerName}</td>
+        <td><a href="/patient?patientId=${patient.patientId}">${patient.fio}</a></td>
+        <td>${patient.address}</td>
+        <td>${patient.insurerName}</td>
       </tr>
     </c:forEach>
   </table>
