@@ -13,45 +13,63 @@
     <title>Информация о пациенте</title>
 </head>
 <body bgcolor="#ffe4c4">
-<font color="#dc143c"><h1 align="center">${patient.fio}</h1></font>
-<table cellpadding="0" cellspacing="0" border="0" width="70%" align="center">
-  <tr>
-    <td>
-      <dl>
-        <dt><b>Адресс:</b></dt>
-        <dd>${patient.address}</dd>
-        <dt><b>Контакты:</b></dt>
-        <dd>${patient.contacts}</dd>
-        <dt><b>Страховщик:</b></dt>
-        <dd>${patient.insurerName}</dd>
-      </dl>
-    </td>
-  </tr>
-  </table>
-<table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="4" width="70%" align="center">
-  <tr>
-    <th width="30%">Диагноз</th>
-    <th width="50%">Описание диагноза</th>
-    <th width="20%">Доктор</th>
-  </tr>
-  <c:forEach var="diagnosis" items="${patient.diagnosisViewList}">
+
+<div>
+  <font color="#dc143c"><h1 align="center">${patient.fio}</h1></font>
+</div>
+
+<div style="float:left; width: 20%">
+  <p align="left">
+    <a href="/main"><b>На главную</b></a><br>
+    <a href=""><b>Доктора</b></a><br>
+    <a href=""><b>Страховщики</b></a><br>
+  </p>
+</div>
+
+<div style="float:left; width: 59%">
+  <table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
     <tr>
       <td>
-        <form action="/patient">
-          <input type="radio" value="${diagnosis.diagnosisId}" name="diagnosisId">
-            ${diagnosis.name}
-          <input type="submit" value="Delete" name="del">
-        </form>
-      </td>
-      <td>${diagnosis.text}</td>
-      <td>
         <dl>
-          <dt>${diagnosis.doctorPost}</dt>
-          <dd>${diagnosis.doctorName}</dd>
+          <dt><b>Адресс:</b></dt>
+          <dd>${patient.address}</dd>
+          <dt><b>Контакты:</b></dt>
+          <dd>${patient.contacts}</dd>
+          <dt><b>Страховщик:</b></dt>
+          <dd>${patient.insurerName}</dd>
         </dl>
       </td>
     </tr>
-  </c:forEach>
   </table>
+  
+  <form action="/patient">
+    <p align="right"><input type="submit" value="Delete" name="del"></p>
+    <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%" align="center">
+      <tr>
+        <th width="30%">Диагноз</th>
+        <th width="50%">Описание диагноза</th>
+        <th width="20%">Доктор</th>
+      </tr>
+      <c:forEach var="diagnosis" items="${patient.diagnosisViewList}">
+        <tr>
+          <td>
+            <input type="radio" value="${diagnosis.diagnosisId}and${patient.patientId}" name="ids">
+              ${diagnosis.name}
+          </td>
+          <td>${diagnosis.text}</td>
+          <td>
+            <dl>
+              <dt>${diagnosis.doctorPost}</dt>
+              <dd>${diagnosis.doctorName}</dd>
+            </dl>
+          </td>
+        </tr>
+      </c:forEach>
+    </table>
+  </form>
+</div>
+
+<div style="float: left; width: 20%"></div>
+
 </body>
 </html>

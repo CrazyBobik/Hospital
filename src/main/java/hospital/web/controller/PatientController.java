@@ -30,14 +30,19 @@ public class PatientController {
     
     @RequestMapping("/patient")
     public String patientPage(@RequestParam(value = "patientId", required = false) Long id, 
-                              HttpServletRequest request, ModelMap map){
+                              @RequestParam(value = "ids", required = false) String ids,
+                              @RequestParam(value = "del", required = false) Object del, ModelMap map){
 
-        if (request.getAttribute("del") != null){
-            DiagnosisView diagnosisView = diagnosisFacade.getDiagnosis((Long) request.getAttribute("diagnosisId"));
+        Long patientId;
+        if (del != null){
+            String[] stringId = ids.split("and");
+            DiagnosisView diagnosisView = diagnosisFacade.getDiagnosis(Long.parseLong(stringId[0]));
             diagnosisFacade.deleteDiagnosis(diagnosisView);
-            return "main";
+            patientId = Long.parseLong(stringId[1]);
+        } else {
+            patientId = id;
         }
-        PatientView view = patientFacade.getPatient(id);
+        PatientView view = patientFacade.getPatient(patientId);
         map.addAttribute("patient", view);
         
         return "patient";
