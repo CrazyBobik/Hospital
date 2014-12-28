@@ -26,7 +26,7 @@
 </div>
 
 <div style="float:left; width: 59%">
-  <form action="/editDiagnosis">
+  <form action="/editDiagnosis" method="post">
     <input type="hidden" value="${diagnosis.diagnosisId}" name="diagnosisId">
     <table>
       <tr>
@@ -62,7 +62,7 @@
         <td>Доктор:</td>
         <td>
           <select name="doctorId">
-            <option value="null">...</option>
+            <option value="not">...</option>
             <c:forEach var="doctor" items="${doctors}">
               <c:choose>
                 <c:when test="${doctor.doctorId==diagnosis.doctorId}">

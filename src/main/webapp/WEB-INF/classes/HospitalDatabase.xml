@@ -21,10 +21,18 @@
             </list>
         </property>
         <property name="hibernateProperties">
-            <value>
-                hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
-                hibernate.show_sql=true
-            </value>
+            <props>
+                <prop key="hibernate.connection.Charset">UTF-8</prop>
+                <prop key="hibernate.connection.CharacterEncoding">UTF-8</prop>
+                <prop key="hibernate.connection.Useunicode">true</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+           
+            <!--<value>-->
+                <!--hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect-->
+                <!--hibernate.show_sql=true-->
+            <!--</value>-->
         </property>
     </bean>
 

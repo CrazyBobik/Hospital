@@ -41,7 +41,7 @@
     </tr>
   </table>
   
-  <form action="/patient">
+  <form action="/patient" method="post">
     <p align="right">
       <input type="hidden" value="${patient.patientId}" name="patientId">
       <input type="submit" value="Delete" name="del">
