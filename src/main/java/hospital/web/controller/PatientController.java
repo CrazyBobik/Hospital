@@ -49,10 +49,13 @@ public class PatientController {
                 
             return "editDiagnosis";
         } else if (add != null) {
-            map.addAttribute("patientId", id);
             map.addAttribute("doctors", doctorFacade.getDoctors());
             map.addAttribute("patients", patientFacade.getPatients());
-            map.addAttribute("diagnosis", new DiagnosisView());
+            
+            DiagnosisView d = new DiagnosisView();
+            d.setPatientId(id);
+            d.setDiagnosisId(0l);
+            map.addAttribute("diagnosis", d);
             
             return "editDiagnosis";
         }
