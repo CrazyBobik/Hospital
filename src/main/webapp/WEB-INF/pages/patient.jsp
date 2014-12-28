@@ -43,7 +43,12 @@
   </table>
   
   <form action="/patient">
-    <p align="right"><input type="submit" value="Delete" name="del"></p>
+    <p align="right">
+      <input type="hidden" value="${patient.patientId}" name="patientId">
+      <input type="submit" value="Delete" name="del">
+      <input type="submit" value="Edit" name="edit">
+      <input type="submit" value="Add" name="add">
+    </p>
     <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%" align="center">
       <tr>
         <th width="30%">Диагноз</th>
@@ -53,7 +58,7 @@
       <c:forEach var="diagnosis" items="${patient.diagnosisViewList}">
         <tr>
           <td>
-            <input type="radio" value="${diagnosis.diagnosisId}and${patient.patientId}" name="ids">
+            <input type="radio" value="${diagnosis.diagnosisId}" name="diagnosisId">
               ${diagnosis.name}
           </td>
           <td>${diagnosis.text}</td>

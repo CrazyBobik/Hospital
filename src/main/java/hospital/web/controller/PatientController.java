@@ -1,6 +1,8 @@
 package hospital.web.controller;
 
+import hospital.entity.Doctor;
 import hospital.facade.DiagnosisFacade;
+import hospital.facade.DoctorFacade;
 import hospital.facade.PatientFacade;
 import hospital.view.DiagnosisView;
 import hospital.view.PatientView;
@@ -28,21 +30,34 @@ public class PatientController {
     @Autowired
     private DiagnosisFacade diagnosisFacade;
     
+    @Autowired
+    private DoctorFacade doctorFacade;
+    
     @RequestMapping("/patient")
     public String patientPage(@RequestParam(value = "patientId", required = false) Long id, 
-                              @RequestParam(value = "ids", required = false) String ids,
-                              @RequestParam(value = "del", required = false) Object del, ModelMap map){
-
-        Long patientId;
+                              @RequestParam(value = "diagnosisId", required = false) Long dId,
+                              @RequestParam(value = "del", required = false) Object del, 
+                              @RequestParam(value = "edit", required = false) Object edit, 
+                              @RequestParam(value = "add", required = false) Object add, ModelMap map){
+        
         if (del != null){
-            String[] stringId = ids.split("and");
-            DiagnosisView diagnosisView = diagnosisFacade.getDiagnosis(Long.parseLong(stringId[0]));
-            diagnosisFacade.deleteDiagnosis(diagnosisView);
-            patientId = Long.parseLong(stringId[1]);
-        } else {
-            patientId = id;
+            diagnosisFacade.deleteDiagnosis(diagnosisFacade.getDiagnosis(dId));
+        } else if (edit != null) {
+            map.addAttribute("diagnosis", diagnosisFacade.getDiagnosis(dId));
+            map.addAttribute("doctors", doctorFacade.getDoctors());
+            map.addAttribute("patients", patientFacade.getPatients());
+                
+            return "editDiagnosis";
+        } else if (add != null) {
+            map.addAttribute("patientId", id);
+            map.addAttribute("doctors", doctorFacade.getDoctors());
+            map.addAttribute("patients", patientFacade.getPatients());
+            map.addAttribute("diagnosis", new DiagnosisView());
+            
+            return "editDiagnosis";
         }
-        PatientView view = patientFacade.getPatient(patientId);
+        
+        PatientView view = patientFacade.getPatient(id);
         map.addAttribute("patient", view);
         
         return "patient";
