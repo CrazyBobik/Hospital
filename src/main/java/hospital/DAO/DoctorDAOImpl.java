@@ -39,4 +39,11 @@ public class DoctorDAOImpl extends BaseDAO implements DoctorDAO {
         template.flush();
         return d;
     }
+
+    @Override
+    public List<Doctor> getDoctors() {
+        List<Doctor> list = (List<Doctor>) template.find("FROM Doctor ORDER BY fio");
+        template.flush();
+        return list;
+    }
 }

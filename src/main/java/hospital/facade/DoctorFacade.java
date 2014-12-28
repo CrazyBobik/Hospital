@@ -6,6 +6,7 @@ import hospital.entity.Diagnosis;
 import hospital.entity.Doctor;
 import hospital.view.DoctorView;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -48,6 +49,16 @@ public class DoctorFacade {
 
     public DoctorView getDoctor(Long id){
         return new DoctorView(doctorDAO.getDoctor(id));
+    }
+    
+    public List<DoctorView> getDoctors(){
+        List<DoctorView> doctorViews = new LinkedList<DoctorView>();
+        List<Doctor> list = doctorDAO.getDoctors();
+        for (Doctor d : list) {
+            doctorViews.add(new DoctorView(d));
+        }
+
+        return doctorViews;
     }
 
     public List<Diagnosis> getDiagnosisesForDoctor(DoctorView doctorView){
