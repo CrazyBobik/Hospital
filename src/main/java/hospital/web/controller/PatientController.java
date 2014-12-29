@@ -41,13 +41,27 @@ public class PatientController {
                               @RequestParam(value = "add", required = false) Object add, ModelMap map){
         
         if (del != null){
-            diagnosisFacade.deleteDiagnosis(diagnosisFacade.getDiagnosis(dId));
+            try {
+                diagnosisFacade.deleteDiagnosis(diagnosisFacade.getDiagnosis(dId));
+            } catch (Exception e){
+                PatientView view = patientFacade.getPatient(id);
+                map.addAttribute("patient", view);
+
+                return "patient";
+            }
         } else if (edit != null) {
-            map.addAttribute("diagnosis", diagnosisFacade.getDiagnosis(dId));
-            map.addAttribute("doctors", doctorFacade.getDoctors());
-            map.addAttribute("patients", patientFacade.getPatients());
+            try {
+                map.addAttribute("diagnosis", diagnosisFacade.getDiagnosis(dId));
+                map.addAttribute("doctors", doctorFacade.getDoctors());
+                map.addAttribute("patients", patientFacade.getPatients());
                 
-            return "editDiagnosis";
+                return "editDiagnosis";
+            } catch (Exception e){
+                PatientView view = patientFacade.getPatient(id);
+                map.addAttribute("patient", view);
+
+                return "patient";
+            }
         } else if (add != null) {
             map.addAttribute("doctors", doctorFacade.getDoctors());
             map.addAttribute("patients", patientFacade.getPatients());

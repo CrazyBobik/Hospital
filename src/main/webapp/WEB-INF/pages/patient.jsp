@@ -19,9 +19,9 @@
 
 <div style="float:left; width: 20%">
   <p align="left">
-    <a href="/main"><b>На главную</b></a><br>
-    <a href=""><b>Доктора</b></a><br>
-    <a href=""><b>Страховщики</b></a><br>
+    <a href="/main"><b>Пациенты</b></a><br>
+    <a href="/doctors"><b>Доктора</b></a><br>
+    <a href="/insurers"><b>Страховщики</b></a><br>
   </p>
 </div>
 
@@ -44,9 +44,9 @@
   <form action="/patient" method="post">
     <p align="right">
       <input type="hidden" value="${patient.patientId}" name="patientId">
-      <input type="submit" value="Delete" name="del">
-      <input type="submit" value="Edit" name="edit">
-      <input type="submit" value="Add" name="add">
+      <input type="submit" value="Добавить" name="add">
+      <input type="submit" value="Удалить" name="del">
+      <input type="submit" value="Редактировать" name="edit">
     </p>
     <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%" align="center">
       <tr>

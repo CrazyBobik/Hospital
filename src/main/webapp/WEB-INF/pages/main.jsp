@@ -19,29 +19,27 @@
 
 <div style="float:left; width: 20%">
   <p align="left">
-    <a href="/main"><b>На главную</b></a><br>
-    <a href=""><b>Доктора</b></a><br>
-    <a href=""><b>Страховщики</b></a><br>
+    <a href="/main"><b>Пациенты</b></a><br>
+    <a href="/doctors"><b>Доктора</b></a><br>
+    <a href="/insurers"><b>Страховщики</b></a><br>
   </p>
 </div>
 
 <div style="float: left; width: 59%">
-  <form action="/main">
-    <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%" align="center">
+  <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%" align="center">
+    <tr>
+      <th width="50%">Ф.И.О.</th>
+      <th width="25%">Адресс</th>
+      <th width="25%">Страховщик</th>
+    </tr>
+    <c:forEach var="patient" items="${patientList}">
       <tr>
-        <th width="50%">Ф.И.О.</th>
-        <th width="25%">Адресс</th>
-        <th width="25%">Страховщик</th>
+        <td><a href="/patient?patientId=${patient.patientId}">${patient.fio}</a></td>
+        <td>${patient.address}</td>
+        <td>${patient.insurerName}</td>
       </tr>
-      <c:forEach var="patient" items="${patientList}">
-        <tr>
-          <td><a href="/patient?patientId=${patient.patientId}">${patient.fio}</a></td>
-          <td>${patient.address}</td>
-          <td>${patient.insurerName}</td>
-        </tr>
-      </c:forEach>
-    </table>
-  </form>
+    </c:forEach>
+  </table>
 </div>
 
 <div style="float: left; width: 20%"></div>
