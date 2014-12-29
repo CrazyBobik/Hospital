@@ -44,10 +44,7 @@ public class PatientController {
             try {
                 diagnosisFacade.deleteDiagnosis(diagnosisFacade.getDiagnosis(dId));
             } catch (Exception e){
-                PatientView view = patientFacade.getPatient(id);
-                map.addAttribute("patient", view);
-
-                return "patient";
+               
             }
         } else if (edit != null) {
             try {
@@ -57,10 +54,7 @@ public class PatientController {
                 
                 return "editDiagnosis";
             } catch (Exception e){
-                PatientView view = patientFacade.getPatient(id);
-                map.addAttribute("patient", view);
-
-                return "patient";
+                
             }
         } else if (add != null) {
             map.addAttribute("doctors", doctorFacade.getDoctors());
@@ -74,8 +68,7 @@ public class PatientController {
             return "editDiagnosis";
         }
         
-        PatientView view = patientFacade.getPatient(id);
-        map.addAttribute("patient", view);
+        map.addAttribute("patient", patientFacade.getPatient(id));
         
         return "patient";
     }

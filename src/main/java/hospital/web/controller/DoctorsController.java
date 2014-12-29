@@ -30,9 +30,7 @@ public class DoctorsController {
             try {
                 doctorFacade.deleteDoctor(doctorFacade.getDoctor(doctorId));
             } catch (Exception e){
-                map.addAttribute("doctorList", doctorFacade.getDoctors());
 
-                return "doctors";
             }
         } else if (edit != null){
             try {
@@ -40,9 +38,7 @@ public class DoctorsController {
             
                 return "editDoctor";
             } catch (Exception e){
-                map.addAttribute("doctorList", doctorFacade.getDoctors());
 
-                return "doctors";
             }
         } else if (add != null){
             DoctorView d = new DoctorView();

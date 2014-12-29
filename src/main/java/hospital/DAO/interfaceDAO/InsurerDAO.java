@@ -2,6 +2,8 @@ package hospital.DAO.interfaceDAO;
 
 import hospital.entity.Insurer;
 
+import java.util.List;
+
 /**
  * Created on 21.12.2014.
  *
@@ -19,4 +21,6 @@ public interface InsurerDAO {
     public void deleteInsurer(Insurer insurer);
 
     public Insurer getInsurer(Long insurerId);
+    
+    public List<Insurer> getInsurers();
 }

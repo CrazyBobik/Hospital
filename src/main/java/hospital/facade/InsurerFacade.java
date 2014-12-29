@@ -50,6 +50,16 @@ public class InsurerFacade {
     public InsurerView getInsurer(Long id){
         return new InsurerView(insurerDAO.getInsurer(id));
     }
+    
+    public List<InsurerView> getInsurers(){
+        List<Insurer> list = insurerDAO.getInsurers();
+        List<InsurerView> viewList = new LinkedList<InsurerView>();
+        for (Insurer i : list) {
+            viewList.add(new InsurerView(i));
+        }
+
+        return viewList;
+    }
 
     public List<Patient> getPatientForInsurer(InsurerView iv){
         return patientDAO.getPatientsForInsurer(createInsurerFromView(iv));

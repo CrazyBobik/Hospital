@@ -45,8 +45,8 @@
     <p align="right">
       <input type="hidden" value="${patient.patientId}" name="patientId">
       <input type="submit" value="Добавить" name="add">
-      <input type="submit" value="Удалить" name="del">
       <input type="submit" value="Редактировать" name="edit">
+      <input type="submit" value="Удалить" name="del">
     </p>
     <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%" align="center">
       <tr>

@@ -3,6 +3,8 @@ package hospital.DAO;
 import hospital.DAO.interfaceDAO.InsurerDAO;
 import hospital.entity.Insurer;
 
+import java.util.List;
+
 /**
  * Created on 21.12.2014.
  *
@@ -36,5 +38,12 @@ public class InsurerDAOImpl extends BaseDAO implements InsurerDAO {
         Insurer i = template.load(Insurer.class, insurerId);
         template.flush();
         return i;
+    }
+
+    @Override
+    public List<Insurer> getInsurers() {
+        List<Insurer> list = (List<Insurer>) template.find("FROM Insurer ORDER BY name");
+        template.flush();
+        return list;
     }
 }
