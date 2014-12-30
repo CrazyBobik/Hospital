@@ -74,16 +74,16 @@ public class MainController {
         if (patientId != null && ok != null){
             PatientView p = new PatientView();
             p.setPatientId(patientId);
-            p.setFio(fio);
+            p.setFio(fio.trim());
             if (address.equals("")){
                 p.setAddress(null);
             } else {
-                p.setAddress(address);
+                p.setAddress(address.trim());
             }
             if (contacts.equals("")){
                 p.setContacts(null);
             } else {
-                p.setContacts(contacts);
+                p.setContacts(contacts.trim());
             }
             if (!insurerId.equals("not")) {
                 p.setInsurerId(Long.parseLong(insurerId));

@@ -62,8 +62,8 @@ public class DoctorsController {
         if (doctorId != null && ok != null){
             DoctorView d = new DoctorView();
             d.setDoctorId(doctorId);
-            d.setFio(fio);
-            d.setPost(post);
+            d.setFio(fio.trim());
+            d.setPost(post.trim());
             
             if (doctorId > 0){
                 doctorFacade.updateDoctor(d);
