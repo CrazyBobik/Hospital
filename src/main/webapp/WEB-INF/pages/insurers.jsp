@@ -14,7 +14,7 @@
 <body bgcolor="#ffe4c4">
 
 <div>
-  <font color="#dc143c"><h1 align="center">Страховщии</h1></font>
+  <font color="#dc143c"><h1 align="center">Страховщики</h1></font>
 </div>
 
 <div style="float:left; width: 20%">

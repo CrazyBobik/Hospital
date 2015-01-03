@@ -18,6 +18,7 @@
                 <value>hospital.entity.Patient</value>
                 <value>hospital.entity.Doctor</value>
                 <value>hospital.entity.Diagnosis</value>
+                <value>hospital.entity.Graphik</value>
             </list>
         </property>
         <property name="hibernateProperties">
