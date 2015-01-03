@@ -1,6 +1,7 @@
 package hospital.view;
 
 import hospital.entity.Diagnosis;
+import hospital.entity.Graphik;
 import hospital.entity.Patient;
 
 import java.util.LinkedList;
@@ -23,15 +24,16 @@ public class PatientView {
     private Long insurerId;
     private String insurerName;
     private List<DiagnosisView> diagnosisViewList;
+    private List<GraphikView> graphikViewList;
 
     public PatientView() {
     }
 
     public PatientView(Patient p){
-        this(p, false);
+        this(p, false, false);
     }
 
-    public PatientView(Patient p, boolean full) {
+    public PatientView(Patient p, boolean full, boolean fullG) {
         this.patientId = p.getPatientId();
         this.fio = p.getFio();
         if (p.getAddress() == null) {
@@ -55,6 +57,14 @@ public class PatientView {
             List<Diagnosis> diagnosisList = p.getDiagnosisList();
             for (Diagnosis d : diagnosisList) {
                 diagnosisViewList.add(new DiagnosisView(d));
+            }
+        }
+        
+        if (fullG){
+            graphikViewList = new LinkedList<GraphikView>();
+            List<Graphik> graphikList = p.getGraphikList();
+            for (Graphik g : graphikList) {
+                graphikViewList.add(new GraphikView(g));
             }
         }
     }
@@ -113,5 +123,13 @@ public class PatientView {
 
     public void setDiagnosisViewList(List<DiagnosisView> diagnosisViewList) {
         this.diagnosisViewList = diagnosisViewList;
+    }
+
+    public List<GraphikView> getGraphikViewList() {
+        return graphikViewList;
+    }
+
+    public void setGraphikViewList(List<GraphikView> graphikViewList) {
+        this.graphikViewList = graphikViewList;
     }
 }

@@ -1,6 +1,10 @@
 package hospital.view;
 
 import hospital.entity.Doctor;
+import hospital.entity.Graphik;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created on 21.12.2014.
@@ -15,14 +19,27 @@ public class DoctorView {
     private Long doctorId;
     private String fio;
     private String post;
+    private List<GraphikView> graphikViewList;
 
     public DoctorView() {
     }
+    
+    public DoctorView(Doctor d){
+        this(d, false);        
+    }
 
-    public DoctorView(Doctor d) {
+    public DoctorView(Doctor d, boolean full) {
         this.doctorId = d.getDoctorId();
         this.fio = d.getFio();
         this.post = d.getPost();
+        
+        if (full){
+            graphikViewList = new LinkedList<GraphikView>();
+            List<Graphik> graphikList = d.getGraphikList();
+            for (Graphik g : graphikList) {
+                graphikViewList.add(new GraphikView(g));
+            }
+        }
     }
 
     public Long getDoctorId() {
@@ -47,5 +64,13 @@ public class DoctorView {
 
     public void setPost(String post) {
         this.post = post;
+    }
+
+    public List<GraphikView> getGraphikViewList() {
+        return graphikViewList;
+    }
+
+    public void setGraphikViewList(List<GraphikView> graphikViewList) {
+        this.graphikViewList = graphikViewList;
     }
 }

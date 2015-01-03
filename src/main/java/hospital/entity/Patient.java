@@ -35,6 +35,9 @@ public class Patient {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "patient")
     private List<Diagnosis> diagnosisList;
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "patient")
+    private List<Graphik> graphikList;
 
     public Long getPatientId() {
         return patientId;
@@ -86,6 +89,14 @@ public class Patient {
 
     public boolean hasInsurer(){
         return insurer != null;
+    }
+
+    public List<Graphik> getGraphikList() {
+        return graphikList;
+    }
+
+    public void setGraphikList(List<Graphik> graphikList) {
+        this.graphikList = graphikList;
     }
 }
 

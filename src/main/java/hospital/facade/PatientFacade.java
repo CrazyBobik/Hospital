@@ -58,7 +58,7 @@ public class PatientFacade {
     }
 
     public PatientView getPatient(Long id){
-        return new PatientView(patientDAO.getPatient(id), true);
+        return new PatientView(patientDAO.getPatient(id), true, true);
     }
 
     public List<PatientView> getPatients(){

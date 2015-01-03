@@ -48,7 +48,7 @@ public class DoctorFacade {
     }
 
     public DoctorView getDoctor(Long id){
-        return new DoctorView(doctorDAO.getDoctor(id));
+        return new DoctorView(doctorDAO.getDoctor(id), true);
     }
     
     public List<DoctorView> getDoctors(){

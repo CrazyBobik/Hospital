@@ -1,6 +1,7 @@
 package hospital.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created on 20.12.2014.
@@ -24,6 +25,9 @@ public class Doctor {
 
     @Column(name = "post")
     private String post;
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "doctor")
+    private List<Graphik> graphikList;
 
     public Long getDoctorId() {
         return doctorId;
@@ -47,6 +51,14 @@ public class Doctor {
 
     public void setPost(String post) {
         this.post = post;
+    }
+
+    public List<Graphik> getGraphikList() {
+        return graphikList;
+    }
+
+    public void setGraphikList(List<Graphik> graphikList) {
+        this.graphikList = graphikList;
     }
 }
 
