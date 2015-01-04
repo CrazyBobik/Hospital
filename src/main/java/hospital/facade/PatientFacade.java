@@ -1,11 +1,14 @@
 package hospital.facade;
 
 import hospital.DAO.interfaceDAO.DiagnosisDAO;
+import hospital.DAO.interfaceDAO.GraphikDAO;
 import hospital.DAO.interfaceDAO.InsurerDAO;
 import hospital.DAO.interfaceDAO.PatientDAO;
 import hospital.entity.Diagnosis;
+import hospital.entity.Graphik;
 import hospital.entity.Patient;
 import hospital.view.DiagnosisView;
+import hospital.view.GraphikView;
 import hospital.view.PatientView;
 
 import java.util.LinkedList;
@@ -23,7 +26,9 @@ public class PatientFacade {
     private PatientDAO patientDAO;
     private InsurerDAO insurerDAO;
     private DiagnosisDAO diagnosisDAO;
+    private GraphikDAO graphikDAO;
     private DiagnosisFacade diagnosisFacade;
+    private GraphikFacade graphikFacade;
 
     public void setPatientDAO(PatientDAO patientDAO) {
         this.patientDAO = patientDAO;
@@ -37,8 +42,16 @@ public class PatientFacade {
         this.diagnosisDAO = diagnosisDAO;
     }
 
+    public void setGraphikDAO(GraphikDAO graphikDAO) {
+        this.graphikDAO = graphikDAO;
+    }
+
     public void setDiagnosisFacade(DiagnosisFacade diagnosisFacade) {
         this.diagnosisFacade = diagnosisFacade;
+    }
+
+    public void setGraphikFacade(GraphikFacade graphikFacade) {
+        this.graphikFacade = graphikFacade;
     }
 
     public Long addPatient(PatientView patientView){
@@ -53,6 +66,9 @@ public class PatientFacade {
     public void deletePatient(PatientView patientView){
         for (DiagnosisView view : getDiagnosisesForPatient(patientView)) {
             diagnosisFacade.deleteDiagnosis(view);
+        }
+        for (GraphikView view : getGraphiksForPatient(patientView)){
+            graphikFacade.deleteGraphik(view);
         }
         patientDAO.deletePatient(patientDAO.getPatient(patientView.getPatientId()));
     }
@@ -79,6 +95,16 @@ public class PatientFacade {
         }
 
         return diagnosisView;
+    }
+    
+    public List<GraphikView> getGraphiksForPatient(PatientView pv){
+        List<GraphikView> graphikView = new LinkedList<GraphikView>();
+        List<Graphik> graphikList = graphikDAO.getGraphiksForPatient(createPatientFromView(pv));
+        for (Graphik g : graphikList) {
+            graphikView.add(new GraphikView(g));
+        }
+
+        return graphikView;
     }
 
     public Patient createPatientFromView(PatientView patientView){

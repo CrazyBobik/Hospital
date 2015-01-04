@@ -2,9 +2,12 @@ package hospital.facade;
 
 import hospital.DAO.interfaceDAO.DiagnosisDAO;
 import hospital.DAO.interfaceDAO.DoctorDAO;
+import hospital.DAO.interfaceDAO.GraphikDAO;
 import hospital.entity.Diagnosis;
 import hospital.entity.Doctor;
+import hospital.entity.Graphik;
 import hospital.view.DoctorView;
+import hospital.view.GraphikView;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +24,8 @@ public class DoctorFacade {
 
     private DoctorDAO doctorDAO;
     private DiagnosisDAO diagnosisDAO;
+    private GraphikDAO graphikDAO;
+    private GraphikFacade graphikFacade;
 
     public void setDoctorDAO(DoctorDAO doctorDAO) {
         this.doctorDAO = doctorDAO;
@@ -28,6 +33,14 @@ public class DoctorFacade {
 
     public void setDiagnosisDAO(DiagnosisDAO diagnosisDAO) {
         this.diagnosisDAO = diagnosisDAO;
+    }
+
+    public void setGraphikDAO(GraphikDAO graphikDAO) {
+        this.graphikDAO = graphikDAO;
+    }
+
+    public void setGraphikFacade(GraphikFacade graphikFacade) {
+        this.graphikFacade = graphikFacade;
     }
 
     public Long addDoctor(DoctorView doctorView){
@@ -43,6 +56,10 @@ public class DoctorFacade {
             d.setDoctor(null);
             diagnosisDAO.updateDiagnosis(d);
         }
+        for (GraphikView view : getGraphiksForDoctor(doctorView)) {
+            graphikFacade.deleteGraphik(view);
+        }
+
 
         doctorDAO.deleteDoctor(doctorDAO.getDoctor(doctorView.getDoctorId()));
     }
@@ -63,6 +80,16 @@ public class DoctorFacade {
 
     public List<Diagnosis> getDiagnosisesForDoctor(DoctorView doctorView){
         return diagnosisDAO.getDiagnosisesForDoctor(createDoctorFromView(doctorView));
+    }
+    
+    public List<GraphikView> getGraphiksForDoctor(DoctorView doctorView){
+        List<GraphikView> graphikView = new LinkedList<GraphikView>();
+        List<Graphik> graphikList = graphikDAO.getGraphiksForDoctor(createDoctorFromView(doctorView));
+        for (Graphik g : graphikList) {
+            graphikView.add(new GraphikView(g));
+        }
+
+        return graphikView;
     }
 
     private Doctor createDoctorFromView(DoctorView doctorView){
