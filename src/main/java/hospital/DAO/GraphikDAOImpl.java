@@ -46,7 +46,7 @@ public class GraphikDAOImpl extends BaseDAO implements GraphikDAO {
     @Override
     public List<Graphik> getGraphiksForPatient(Patient p) {
         List<Graphik> g = (List<Graphik>) template.findByNamedParam("FROM Graphik g WHERE g.patient = :patient " +
-        "ORDER BY g.a_time", "patient", p);
+        "ORDER BY g.date", "patient", p);
         template.flush();
         return g;
     }
@@ -54,7 +54,7 @@ public class GraphikDAOImpl extends BaseDAO implements GraphikDAO {
     @Override
     public List<Graphik> getGraphiksForDoctor(Doctor d) {
         List<Graphik> g = (List<Graphik>) template.findByNamedParam("FROM Graphik g WHERE g.doctor = :doctor " +
-        "ORDER BY g.a_time", "doctor", d);
+        "ORDER BY g.date", "doctor", d);
         template.flush();
         return g;
     }

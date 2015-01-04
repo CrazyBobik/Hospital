@@ -98,6 +98,7 @@ public class DoctorFacade {
             doctor = doctorDAO.getDoctor(doctorView.getDoctorId());
         } else {
             doctor = new Doctor();
+            doctor.setGraphikList(new LinkedList<Graphik>());
         }
         doctor.setFio(doctorView.getFio());
         doctor.setPost(doctorView.getPost());

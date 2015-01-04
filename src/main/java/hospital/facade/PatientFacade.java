@@ -114,6 +114,7 @@ public class PatientFacade {
         } else {
             patient = new Patient();
             patient.setDiagnosisList(new LinkedList<Diagnosis>());
+            patient.setGraphikList(new LinkedList<Graphik>());
         }
         patient.setFio(patientView.getFio());
         patient.setAddress(patientView.getAddress());

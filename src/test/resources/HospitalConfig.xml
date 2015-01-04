@@ -20,6 +20,9 @@
     <bean name="patientDAO" class="hospital.DAO.PatientDAOImpl" parent="baseDAO">
     </bean>
 
+    <bean name="graphikDAO" class="hospital.DAO.GraphikDAOImpl" parent="baseDAO">
+    </bean>
+
     <bean name="diagnosisFacade" parent="abstractTransactionProxy">
         <property name="target">
             <bean class="hospital.facade.DiagnosisFacade">
@@ -36,7 +39,9 @@
                 <property name="patientDAO" ref="patientDAO" />
                 <property name="insurerDAO" ref="insurerDAO" />
                 <property name="diagnosisDAO" ref="diagnosisDAO"/>
+                <property name="graphikDAO" ref="graphikDAO"/>
                 <property name="diagnosisFacade" ref="diagnosisFacade"/>
+                <property name="graphikFacade" ref="graphikFacade"/>
             </bean>
         </property>
     </bean>
@@ -46,6 +51,8 @@
             <bean class="hospital.facade.DoctorFacade">
                 <property name="doctorDAO" ref="doctorDAO"/>
                 <property name="diagnosisDAO" ref="diagnosisDAO"/>
+                <property name="graphikDAO" ref="graphikDAO"/>
+                <property name="graphikFacade" ref="graphikFacade"/>
             </bean>
         </property>
     </bean>
@@ -54,6 +61,16 @@
         <property name="target">
             <bean class="hospital.facade.InsurerFacade">
                 <property name="insurerDAO" ref="insurerDAO"/>
+                <property name="patientDAO" ref="patientDAO"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean name="graphikFacade" parent="abstractTransactionProxy">
+        <property name="target">
+            <bean class="hospital.facade.GraphikFacade">
+                <property name="doctorDAO" ref="doctorDAO"/>
+                <property name="graphikDAO" ref="graphikDAO"/>
                 <property name="patientDAO" ref="patientDAO"/>
             </bean>
         </property>
