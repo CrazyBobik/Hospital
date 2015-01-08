@@ -16,6 +16,7 @@ public class GraphikView {
     
     private Long graphikId;
     private Long patientId;
+    private String fio;
     private Long doctorId;
     private String doctorName;
     private String doctorPost;
@@ -28,6 +29,7 @@ public class GraphikView {
         
         this.graphikId = g.getGraphikId();
         this.patientId = g.getPatient().getPatientId();
+        this.fio = g.getPatient().getFio();
         this.doctorId = g.getDoctor().getDoctorId();
         this.doctorName = g.getDoctor().getFio();
         this.doctorPost = g.getDoctor().getPost();
@@ -44,6 +46,14 @@ public class GraphikView {
 
     public Long getPatientId() {
         return patientId;
+    }
+
+    public String getFio() {
+        return fio;
+    }
+
+    public void setFio(String fio) {
+        this.fio = fio;
     }
 
     public void setPatientId(Long patientId) {
