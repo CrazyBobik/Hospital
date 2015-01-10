@@ -38,7 +38,7 @@ public class PatientController {
                               @RequestParam(value = "add", required = false) Object add, ModelMap map){
         
         if (graphik != null){
-            map.addAttribute("target", patientFacade.getPatient(id));
+            map.addAttribute("patient", patientFacade.getPatient(id));
             
             return "graphik";
         } else if (del != null){

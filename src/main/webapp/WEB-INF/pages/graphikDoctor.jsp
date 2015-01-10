@@ -1,20 +1,20 @@
 <%--
   Created by IntelliJ IDEA.
   User: Артем
-  Date: 29.12.2014
-  Time: 14:34
+  Date: 09.01.2015
+  Time: 0:51
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Доктора</title>
+  <title>Запись на прием</title>
 </head>
 <body bgcolor="#ffe4c4">
 
 <div>
-  <font color="#dc143c"><h1 align="center">Доктора</h1></font>
+  <font color="#dc143c"><h1 align="center">Запись на прием</h1></font>
 </div>
 
 <div style="float:left; width: 20%">
@@ -27,25 +27,25 @@
 </div>
 
 <div style="float: left; width: 59%">
-  <form action="/doctors" method="post">
+  <form action="/graphikDoctor" method="post">
     <p align="right">
-      <input type="submit" value="График приемов" name="graphik">
-      <input type="submit" value="Добавить" name="add">
-      <input type="submit" value="Редактировать" name="edit">
+      <input type="hidden" value="${doctor.doctorId}" name="doctorId">
       <input type="submit" value="Удалить" name="del">
     </p>
     <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%" align="center">
       <tr>
-        <th width="50%">Ф.И.О.</th>
-        <th width="50%">Пост</th>
+        <th width="35%">Доктор</th>
+        <th width="35%">Пациент</th>
+        <th width="30%">Время</th>
       </tr>
-      <c:forEach var="doctor" items="${doctorList}">
+      <c:forEach var="graphik" items="${doctor.graphikViewList}">
         <tr>
           <td>
-            <input type="radio" value="${doctor.doctorId}" name="doctorId">
-              ${doctor.fio}
+            <input type="radio" value="${graphik.graphikId}" name="graphikId">
+              ${graphik.doctorName}
           </td>
-          <td>${doctor.post}</td>
+          <td>${graphik.fio}</td>
+          <td>${graphik.date}</td>
         </tr>
       </c:forEach>
     </table>
@@ -56,3 +56,4 @@
 
 </body>
 </html>
+

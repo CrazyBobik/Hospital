@@ -29,9 +29,9 @@ public class DoctorsController {
                                   @RequestParam(value = "add", required = false) Object add, ModelMap map){
         if (graphik != null){
             try {
-                map.addAttribute("target", doctorFacade.getDoctor(doctorId));
+                map.addAttribute("doctor", doctorFacade.getDoctor(doctorId));
 
-                return "graphik";
+                return "graphikDoctor";
             } catch (Exception e) {
 
             }

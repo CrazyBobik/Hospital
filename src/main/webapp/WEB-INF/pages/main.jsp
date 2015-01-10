@@ -22,7 +22,7 @@
     <a href="/main"><b>Пациенты</b></a><br>
     <a href="/doctors"><b>Доктора</b></a><br>
     <a href="/insurers"><b>Страховщики</b></a><br>
-    <a href="/addgraphik"><b>Записатся на прием</b></a>
+    <a href="/addGraphik"><b>Записатся на прием</b></a>
   </p>
 </div>
 

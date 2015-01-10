@@ -22,27 +22,34 @@
     <a href="/main"><b>Пациенты</b></a><br>
     <a href="/doctors"><b>Доктора</b></a><br>
     <a href="/insurers"><b>Страховщики</b></a><br>
-    <a href="/addgraphik"><b>Записатся на прием</b></a>
+    <a href="/addGraphik"><b>Записатся на прием</b></a>
   </p>
 </div>
 
 <div style="float: left; width: 59%">
-  <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%" align="center">
-    <tr>
-      <th width="35%">Доктор</th>
-      <th width="35%">Пациент</th>
-      <th width="30%">Время</th>
-    </tr>
-    <c:forEach var="graphik" items="${target.graphikViewList}">
+  <form action="/graphikPatient" method="post">
+    <p align="right">
+      <input type="hidden" value="${patient.patientId}" name="patientId">
+      <input type="submit" value="Удалить" name="del">
+    </p>
+    <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%" align="center">
       <tr>
-        <td>
-          ${graphik.doctorName}
-        </td>
-        <td>${graphik.fio}</td>
-        <td>${graphik.date}</td>
+        <th width="35%">Доктор</th>
+        <th width="35%">Пациент</th>
+        <th width="30%">Время</th>
       </tr>
-    </c:forEach>
-  </table>
+      <c:forEach var="graphik" items="${patient.graphikViewList}">
+        <tr>
+          <td>
+            <input type="radio" value="${graphik.graphikId}" name="graphikId">
+              ${graphik.doctorName}
+          </td>
+          <td>${graphik.fio}</td>
+          <td>${graphik.date}</td>
+        </tr>
+      </c:forEach>
+    </table>
+  </form>
 </div>
 
 <div style="float: left; width: 20%"></div>
