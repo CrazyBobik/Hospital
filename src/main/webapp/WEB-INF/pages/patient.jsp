@@ -45,6 +45,7 @@
   <form action="/patient" method="post">
     <p align="right">
       <input type="hidden" value="${patient.patientId}" name="patientId">
+      <input type="submit" value="График приемов" name="graphik">
       <input type="submit" value="Добавить" name="add">
       <input type="submit" value="Редактировать" name="edit">
       <input type="submit" value="Удалить" name="del">

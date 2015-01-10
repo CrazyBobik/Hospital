@@ -23,10 +23,19 @@ public class DoctorsController {
     
     @RequestMapping("/doctors")
     public String printAllDoctors(@RequestParam(value = "doctorId", required = false) Long doctorId,
+                                  @RequestParam(value = "graphik", required = false) Object graphik,
                                   @RequestParam(value = "del", required = false) Object del,
                                   @RequestParam(value = "edit", required = false) Object edit,
                                   @RequestParam(value = "add", required = false) Object add, ModelMap map){
-        if (del != null){
+        if (graphik != null){
+            try {
+                map.addAttribute("target", doctorFacade.getDoctor(doctorId));
+
+                return "graphik";
+            } catch (Exception e) {
+
+            }
+        } else if (del != null){
             try {
                 doctorFacade.deleteDoctor(doctorFacade.getDoctor(doctorId));
             } catch (Exception e){

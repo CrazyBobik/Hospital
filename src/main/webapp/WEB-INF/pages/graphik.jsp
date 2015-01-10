@@ -33,7 +33,7 @@
       <th width="35%">Пациент</th>
       <th width="30%">Время</th>
     </tr>
-    <c:forEach var="graphik" items="${graphikList}">
+    <c:forEach var="graphik" items="${target.graphikViewList}">
       <tr>
         <td>
           ${graphik.doctorName}

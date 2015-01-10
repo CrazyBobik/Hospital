@@ -1,18 +1,14 @@
 package hospital.web.controller;
 
-import hospital.entity.Doctor;
 import hospital.facade.DiagnosisFacade;
 import hospital.facade.DoctorFacade;
 import hospital.facade.PatientFacade;
 import hospital.view.DiagnosisView;
-import hospital.view.PatientView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created on 26.12.2014.
@@ -36,11 +32,16 @@ public class PatientController {
     @RequestMapping("/patient")
     public String patientPage(@RequestParam(value = "patientId", required = false) Long id, 
                               @RequestParam(value = "diagnosisId", required = false) Long dId,
+                              @RequestParam(value = "graphik", required = false) Object graphik,
                               @RequestParam(value = "del", required = false) Object del, 
                               @RequestParam(value = "edit", required = false) Object edit, 
                               @RequestParam(value = "add", required = false) Object add, ModelMap map){
         
-        if (del != null){
+        if (graphik != null){
+            map.addAttribute("target", patientFacade.getPatient(id));
+            
+            return "graphik";
+        } else if (del != null){
             try {
                 diagnosisFacade.deleteDiagnosis(diagnosisFacade.getDiagnosis(dId));
             } catch (Exception e){
