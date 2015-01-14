@@ -61,7 +61,7 @@
           День: 
           <select name="day">
             <c:forEach var="day" items="${days}">
-              <option value="${day}">${day + 1}</option>
+              <option value="${day}">${day}</option>
             </c:forEach>
           </select>
           </td>

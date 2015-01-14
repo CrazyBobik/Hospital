@@ -95,7 +95,7 @@ public class GraphikController {
         int[] days = new int[31];
         int[] months = new int[12];
         for (int i = 0; i < 31; i++) {
-            days[i] = i;
+            days[i] = i + 1;
         }
         for (int i = 0; i < 12; i++) {
             months[i] = i;
