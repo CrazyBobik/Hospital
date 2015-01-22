@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <html>
 <head>
     <title>Пациент</title>
@@ -17,17 +19,10 @@
   <font color="#dc143c"><h1 align="center">Введите данные о пациенте</h1></font>
 </div>
 
-<div style="float:left; width: 20%">
-  <p align="left">
-    <a href="/main"><b>Пациенты</b></a><br>
-    <a href="/doctors"><b>Доктора</b></a><br>
-    <a href="/insurers"><b>Страховщики</b></a><br>
-    <a href="/addGraphik"><b>Записатся на прием</b></a>
-  </p>
-</div>
+<jsp:include page="../parts/menu.jsp"/>
 
 <div style="float:left; width: 59%">
-  <form action="/editPatient" method="post">
+  <form:form modelAttribute="patient" action="/editPatient" method="post">
     <input type="hidden" value="${patient.patientId}" name="patientId">
     <table>
       <tr>
@@ -75,7 +70,7 @@
         </td>
       </tr>
     </table>
-  </form>
+  </form:form>
 </div>
 
 <div style="float: left; width: 20%"></div>

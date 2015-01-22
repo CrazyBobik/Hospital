@@ -29,48 +29,55 @@ public class PatientController {
     @Autowired
     private DoctorFacade doctorFacade;
     
-    @RequestMapping("/patient")
-    public String patientPage(@RequestParam(value = "patientId", required = false) Long id, 
-                              @RequestParam(value = "diagnosisId", required = false) Long dId,
-                              @RequestParam(value = "graphik", required = false) Object graphik,
-                              @RequestParam(value = "del", required = false) Object del, 
-                              @RequestParam(value = "edit", required = false) Object edit, 
-                              @RequestParam(value = "add", required = false) Object add, ModelMap map){
+    @RequestMapping("/patients")
+    public String showAllPatients(ModelMap map){
+        map.addAttribute("patientList", patientFacade.getPatients());
         
-        if (graphik != null){
-            map.addAttribute("patient", patientFacade.getPatient(id));
-            
-            return "graphik";
-        } else if (del != null){
-            try {
-                diagnosisFacade.deleteDiagnosis(diagnosisFacade.getDiagnosis(dId));
-            } catch (Exception e){
-               
-            }
-        } else if (edit != null) {
-            try {
-                map.addAttribute("diagnosis", diagnosisFacade.getDiagnosis(dId));
-                map.addAttribute("doctors", doctorFacade.getDoctors());
-                map.addAttribute("patients", patientFacade.getPatients());
-                
-                return "editDiagnosis";
-            } catch (Exception e){
-                
-            }
-        } else if (add != null) {
-            map.addAttribute("doctors", doctorFacade.getDoctors());
-            map.addAttribute("patients", patientFacade.getPatients());
-            
-            DiagnosisView d = new DiagnosisView();
-            d.setPatientId(id);
-            d.setDiagnosisId(0l);
-            map.addAttribute("diagnosis", d);
-            
-            return "editDiagnosis";
-        }
-        
-        map.addAttribute("patient", patientFacade.getPatient(id));
-        
-        return "patient";
+        return "patients/patients";
     }
+    
+//    @RequestMapping("/patient")
+//    public String patientPage(@RequestParam(value = "patientId", required = false) Long id,
+//                              @RequestParam(value = "diagnosisId", required = false) Long dId,
+//                              @RequestParam(value = "graphik", required = false) Object graphik,
+//                              @RequestParam(value = "del", required = false) Object del,
+//                              @RequestParam(value = "edit", required = false) Object edit,
+//                              @RequestParam(value = "add", required = false) Object add, ModelMap map){
+//
+//        if (graphik != null){
+//            map.addAttribute("patient", patientFacade.getPatient(id));
+//
+//            return "graphiks/graphik";
+//        } else if (del != null){
+//            try {
+//                diagnosisFacade.deleteDiagnosis(diagnosisFacade.getDiagnosis(dId));
+//            } catch (Exception e){
+//
+//            }
+//        } else if (edit != null) {
+//            try {
+//                map.addAttribute("diagnosis", diagnosisFacade.getDiagnosis(dId));
+//                map.addAttribute("doctors", doctorFacade.getDoctors());
+//                map.addAttribute("patients", patientFacade.getPatients());
+//
+//                return "diagnosies/editDiagnosis";
+//            } catch (Exception e){
+//
+//            }
+//        } else if (add != null) {
+//            map.addAttribute("doctors", doctorFacade.getDoctors());
+//            map.addAttribute("patients", patientFacade.getPatients());
+//
+//            DiagnosisView d = new DiagnosisView();
+//            d.setPatientId(id);
+//            d.setDiagnosisId(0l);
+//            map.addAttribute("diagnosis", d);
+//
+//            return "diagnosies/editDiagnosis";
+//        }
+//
+//        map.addAttribute("patient", patientFacade.getPatient(id));
+//
+//        return "patients/patient";
+//    }
 }

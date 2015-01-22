@@ -36,12 +36,12 @@ public class PatientView {
     public PatientView(Patient p, boolean full, boolean fullG) {
         this.patientId = p.getPatientId();
         this.fio = p.getFio();
-        if (p.getAddress() == null) {
+        if (p.getAddress() == null || p.getAddress().equals("")) {
             this.address = "Не указано";
         } else {
             this.address = p.getAddress();
         }
-        if (p.getContacts() == null){
+        if (p.getContacts() == null || p.getContacts().equals("")){
             this.contacts = "Не указаны";
         } else {
             this.contacts = p.getContacts();

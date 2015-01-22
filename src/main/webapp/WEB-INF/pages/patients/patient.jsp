@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Артем
@@ -7,6 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+
 <html>
 <head>
     <title>Информация о пациенте</title>
@@ -17,19 +20,12 @@
   <font color="#dc143c"><h1 align="center">${patient.fio}</h1></font>
 </div>
 
-<div style="float:left; width: 20%">
-  <p align="left">
-    <a href="/main"><b>Пациенты</b></a><br>
-    <a href="/doctors"><b>Доктора</b></a><br>
-    <a href="/insurers"><b>Страховщики</b></a><br>
-    <a href="/addGraphik"><b>Записатся на прием</b></a>
-  </p>
-</div>
+<jsp:include page="../parts/menu.jsp"/>
 
 <div style="float:left; width: 59%">
   <table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
     <tr>
-      <td>
+      <td colspan="2">
         <dl>
           <dt><b>Адресс:</b></dt>
           <dd>${patient.address}</dd>
@@ -38,6 +34,11 @@
           <dt><b>Страховщик:</b></dt>
           <dd>${patient.insurerName}</dd>
         </dl>
+      </td>
+    </tr>
+    <tr>
+      <td align="left">
+        
       </td>
     </tr>
   </table>

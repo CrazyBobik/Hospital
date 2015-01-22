@@ -11,9 +11,12 @@
   <title>Приветствуем =)</title>
 </head>
 <body bgcolor="#ffe4c4">
-<font color="#dc143c"><h1 align="center">Приветствуем в нашей больнице</h1></font>
-<form action="/main">
-  <p align="center"><input type="submit" value="Просмотреть карточки пациентов" /></p>
-</form>
+
+<div>
+  <font color="#dc143c"><h1 align="center">Приветствуем в нашей больнице</h1></font>
+</div>
+
+<jsp:include page="parts/menu.jsp"/>
+
 </body>
 </html>
