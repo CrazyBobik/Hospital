@@ -119,7 +119,7 @@ public class PatientFacade {
         patient.setFio(patientView.getFio());
         patient.setAddress(patientView.getAddress());
         patient.setContacts(patientView.getContacts());
-        if (patientView.getInsurerId() != null) {
+        if (patientView.getInsurerId() != null && patientView.getInsurerId() != 0) {
             patient.setInsurer(insurerDAO.getInsurer(patientView.getInsurerId()));
         } else {
             patient.setInsurer(null);

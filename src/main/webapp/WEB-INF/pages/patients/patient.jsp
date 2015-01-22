@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <html>
 <head>
@@ -25,6 +25,20 @@
 <div style="float:left; width: 59%">
   <table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
     <tr>
+      <td width="50%">
+        <spring:url value="/patients/{patientId}/edit.html" var="editPatient">
+          <spring:param name="patientId" value="${patient.patientId}"/>
+        </spring:url>
+        <a href="${fn:escapeXml(editPatient)}">Редактировать пациента</a>
+      </td>
+      <td width="50%" align="right">
+        <spring:url value="/patients/{patientId}/delete.html" var="deletePatient">
+          <spring:param name="patientId" value="${patient.patientId}"/>
+        </spring:url>
+        <a href="${fn:escapeXml(deletePatient)}">Удалить пациента</a>
+      </td>
+    </tr>
+    <tr>
       <td colspan="2">
         <dl>
           <dt><b>Адресс:</b></dt>
@@ -37,43 +51,60 @@
       </td>
     </tr>
     <tr>
-      <td align="left">
-        
+      <td>
+        <spring:url value="/patients/{patientId}/graphiks.html" var="showGraphiks">
+          <spring:param name="patientId" value="${patient.patientId}"/>
+        </spring:url>
+        <a href="${fn:escapeXml(showGraphiks)}">График приемов</a>
+      </td>
+      <td align="right">
+        <spring:url value="/patients/{patientId}/diagnosises/new.html" var="addDiagnosis">
+          <spring:param name="patientId" value="${patient.patientId}"/>
+        </spring:url>
+        <a href="${fn:escapeXml(addDiagnosis)}">Добавить диагноз</a>
       </td>
     </tr>
   </table>
   
-  <form action="/patient" method="post">
-    <p align="right">
-      <input type="hidden" value="${patient.patientId}" name="patientId">
-      <input type="submit" value="График приемов" name="graphik">
-      <input type="submit" value="Добавить" name="add">
-      <input type="submit" value="Редактировать" name="edit">
-      <input type="submit" value="Удалить" name="del">
-    </p>
-    <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%" align="center">
+  <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%" align="center">
+    <tr>
+      <th width="30%">Диагноз</th>
+      <th width="50%">Описание диагноза</th>
+      <th width="20%">Доктор</th>
+    </tr>
+    <c:forEach var="diagnosis" items="${patient.diagnosisViewList}">
       <tr>
-        <th width="30%">Диагноз</th>
-        <th width="50%">Описание диагноза</th>
-        <th width="20%">Доктор</th>
+        <td>
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+              <tr>
+                <td rowspan="2" width="50%">${diagnosis.name}</td>
+                <td width="50%">
+                  <spring:url value="/patients/{patientId}/diagnosis/edit.html" var="editDiagnosis">
+                    <spring:param name="diagnosisId" value="${diagnosis.diagnosisId}"/>
+                  </spring:url>
+                  <a href="${fn:escapeXml(editDiagnosis)}">Редактировать</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <spring:url value="/patients/{patientId}/diagnosis/delete.html" var="deleteDiagnosis">
+                    <spring:param name="diagnosisId" value="${diagnosis.diagnosisId}"/>
+                  </spring:url>
+                  <a href="${fn:escapeXml(deleteDiagnosis)}">Удалить</a>
+                </td>
+              </tr>
+            </table>
+        </td>
+        <td>${diagnosis.text}</td>
+        <td>
+          <dl>
+            <dt>${diagnosis.doctorPost}</dt>
+            <dd>${diagnosis.doctorName}</dd>
+          </dl>
+        </td>
       </tr>
-      <c:forEach var="diagnosis" items="${patient.diagnosisViewList}">
-        <tr>
-          <td>
-            <input type="radio" value="${diagnosis.diagnosisId}" name="diagnosisId">
-              ${diagnosis.name}
-          </td>
-          <td>${diagnosis.text}</td>
-          <td>
-            <dl>
-              <dt>${diagnosis.doctorPost}</dt>
-              <dd>${diagnosis.doctorName}</dd>
-            </dl>
-          </td>
-        </tr>
-      </c:forEach>
-    </table>
-  </form>
+    </c:forEach>
+  </table>
 </div>
 
 <div style="float: left; width: 20%"></div>

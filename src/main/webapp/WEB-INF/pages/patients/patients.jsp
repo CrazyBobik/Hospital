@@ -38,7 +38,7 @@
       <c:forEach var="patient" items="${patientList}">
         <tr>
           <td>
-            <spring:url value="patients/{patientId}.html" var="patientURL">
+            <spring:url value="/patients/{patientId}.html" var="patientURL">
               <spring:param name="patientId" value="${patient.patientId}"/>
             </spring:url>
             <a href="${fn:escapeXml(patientURL)}"><c:out value="${patient.fio}"/></a>

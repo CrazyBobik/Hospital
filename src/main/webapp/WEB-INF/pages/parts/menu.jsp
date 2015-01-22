@@ -9,7 +9,7 @@
 
 <div style="float:left; width: 20%">
   <p align="left">
-    <a href="../welcome.jsp"><b>На главную</b></a>
+    <a href="/"><b>На главную</b></a><br>
     <a href="/patients"><b>Пациенты</b></a><br>
     <a href="/doctors"><b>Доктора</b></a><br>
     <a href="/insurers"><b>Страховщики</b></a><br>

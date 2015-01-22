@@ -11,7 +11,7 @@
 
 <html>
 <head>
-    <title>Пациент</title>
+  <title>Пациент</title>
 </head>
 <body bgcolor="#ffe4c4">
 
@@ -22,7 +22,7 @@
 <jsp:include page="../parts/menu.jsp"/>
 
 <div style="float:left; width: 59%">
-  <form:form modelAttribute="patient" action="/editPatient" method="post">
+  <form:form modelAttribute="patient" method="post">
     <input type="hidden" value="${patient.patientId}" name="patientId">
     <table>
       <tr>
@@ -47,7 +47,7 @@
         <td>Страховщик:</td>
         <td>
           <select name="insurerId">
-            <option value="not">...</option>
+            <option value="0">...</option>
             <c:forEach var="insurer" items="${insurers}">
               <c:choose>
                 <c:when test="${insurer.insurerId==patient.insurerId}">

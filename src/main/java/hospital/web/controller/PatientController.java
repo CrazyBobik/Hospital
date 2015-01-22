@@ -2,13 +2,16 @@ package hospital.web.controller;
 
 import hospital.facade.DiagnosisFacade;
 import hospital.facade.DoctorFacade;
+import hospital.facade.InsurerFacade;
 import hospital.facade.PatientFacade;
-import hospital.view.DiagnosisView;
+import hospital.view.PatientView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Created on 26.12.2014.
@@ -24,6 +27,9 @@ public class PatientController {
     private PatientFacade patientFacade;
     
     @Autowired
+    private InsurerFacade insurerFacade;
+    
+    @Autowired
     private DiagnosisFacade diagnosisFacade;
     
     @Autowired
@@ -36,48 +42,50 @@ public class PatientController {
         return "patients/patients";
     }
     
-//    @RequestMapping("/patient")
-//    public String patientPage(@RequestParam(value = "patientId", required = false) Long id,
-//                              @RequestParam(value = "diagnosisId", required = false) Long dId,
-//                              @RequestParam(value = "graphik", required = false) Object graphik,
-//                              @RequestParam(value = "del", required = false) Object del,
-//                              @RequestParam(value = "edit", required = false) Object edit,
-//                              @RequestParam(value = "add", required = false) Object add, ModelMap map){
-//
-//        if (graphik != null){
-//            map.addAttribute("patient", patientFacade.getPatient(id));
-//
-//            return "graphiks/graphik";
-//        } else if (del != null){
-//            try {
-//                diagnosisFacade.deleteDiagnosis(diagnosisFacade.getDiagnosis(dId));
-//            } catch (Exception e){
-//
-//            }
-//        } else if (edit != null) {
-//            try {
-//                map.addAttribute("diagnosis", diagnosisFacade.getDiagnosis(dId));
-//                map.addAttribute("doctors", doctorFacade.getDoctors());
-//                map.addAttribute("patients", patientFacade.getPatients());
-//
-//                return "diagnosies/editDiagnosis";
-//            } catch (Exception e){
-//
-//            }
-//        } else if (add != null) {
-//            map.addAttribute("doctors", doctorFacade.getDoctors());
-//            map.addAttribute("patients", patientFacade.getPatients());
-//
-//            DiagnosisView d = new DiagnosisView();
-//            d.setPatientId(id);
-//            d.setDiagnosisId(0l);
-//            map.addAttribute("diagnosis", d);
-//
-//            return "diagnosies/editDiagnosis";
-//        }
-//
-//        map.addAttribute("patient", patientFacade.getPatient(id));
-//
-//        return "patients/patient";
-//    }
+    @RequestMapping(value = "/patients/new", method = RequestMethod.GET)
+    public String prepareAddForm(ModelMap map){
+        PatientView patientView = new PatientView();
+        patientView.setPatientId(0L);
+        
+        map.addAttribute("patient", patientView);
+        map.addAttribute("insurers", insurerFacade.getInsurers());
+        
+        return "patients/editOrUpdatePatient";
+    }
+    
+    @RequestMapping(value = "/patients/new", method = RequestMethod.POST)
+    public String processAddForm(@ModelAttribute("patient") PatientView patient){
+        patientFacade.addPatient(patient);
+        
+        return "redirect:/patients";
+    }
+    
+    @RequestMapping("/patients/{patientId}")
+    public String showPatient(@PathVariable("patientId") Long patientId, ModelMap map){
+        map.addAttribute("patient", patientFacade.getPatient(patientId));
+        
+        return "patients/patient";
+    }
+    
+    @RequestMapping(value = "/patients/{patientId}/edit", method = RequestMethod.GET)
+    public String prepareEditForm(@PathVariable("patientId") Long patientId, ModelMap map){
+        map.addAttribute("patient", patientFacade.getPatient(patientId));
+        map.addAttribute("insurers", insurerFacade.getInsurers());
+        
+        return "patients/editOrUpdatePatient";
+    }
+    
+    @RequestMapping(value = "/patients/{patientId}/edit", method = RequestMethod.POST)
+    public String processEditForm(@ModelAttribute("patient") PatientView patient){
+        patientFacade.updatePatient(patient);
+        
+        return "redirect:/patients/{patientId}";
+    }
+    
+    @RequestMapping("patients/{patientId}/delete")
+    public String deletePatient(@PathVariable("patientId") Long patientId){
+        patientFacade.deletePatient(patientFacade.getPatient(patientId));
+        
+        return "redirect:/patients";
+    }
 }
