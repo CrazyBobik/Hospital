@@ -58,7 +58,7 @@
         <a href="${fn:escapeXml(showGraphiks)}">График приемов</a>
       </td>
       <td align="right">
-        <spring:url value="/patients/{patientId}/diagnosises/new.html" var="addDiagnosis">
+        <spring:url value="/patients/{patientId}/diagnosis/new.html" var="addDiagnosis">
           <spring:param name="patientId" value="${patient.patientId}"/>
         </spring:url>
         <a href="${fn:escapeXml(addDiagnosis)}">Добавить диагноз</a>
@@ -79,7 +79,8 @@
               <tr>
                 <td rowspan="2" width="50%">${diagnosis.name}</td>
                 <td width="50%">
-                  <spring:url value="/patients/{patientId}/diagnosis/edit.html" var="editDiagnosis">
+                  <spring:url value="/patients/{patientId}/diagnosis/{diagnosisId}/edit.html" var="editDiagnosis">
+                    <spring:param name="patientId" value="${patient.patientId}"/>
                     <spring:param name="diagnosisId" value="${diagnosis.diagnosisId}"/>
                   </spring:url>
                   <a href="${fn:escapeXml(editDiagnosis)}">Редактировать</a>
@@ -87,7 +88,8 @@
               </tr>
               <tr>
                 <td>
-                  <spring:url value="/patients/{patientId}/diagnosis/delete.html" var="deleteDiagnosis">
+                  <spring:url value="/patients/{patientId}/diagnosis/{diagnosisId}/delete.html" var="deleteDiagnosis">
+                    <spring:param name="patientId" value="${patient.patientId}"/>
                     <spring:param name="diagnosisId" value="${diagnosis.diagnosisId}"/>
                   </spring:url>
                   <a href="${fn:escapeXml(deleteDiagnosis)}">Удалить</a>

@@ -1,9 +1,14 @@
 package hospital.web.controller;
 
 import hospital.facade.DiagnosisFacade;
+import hospital.facade.DoctorFacade;
 import hospital.facade.PatientFacade;
+import hospital.view.DiagnosisView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,34 +27,50 @@ public class DiagnosisController {
 
     @Autowired
     private PatientFacade patientFacade;
+    
+    @Autowired
+    private DoctorFacade doctorFacade;
 
     @RequestMapping(value = "/patients/{patientId}/diagnosis/new", method = RequestMethod.GET)
-    public String prepareAddForm(){
+    public String prepareAddForm(@PathVariable("patientId") Long patientId, ModelMap map){
+        DiagnosisView d = new DiagnosisView();
+        d.setDiagnosisId(0L);
         
-        return null;
+        map.addAttribute("diagnosis", d);
+        map.addAttribute("patient", patientFacade.getPatient(patientId));
+        map.addAttribute("doctors", doctorFacade.getDoctors());
+        
+        return "diagnosises/editOrAddDiagnosis";
     }
     
     @RequestMapping(value = "/patients/{patientId}/diagnosis/new", method = RequestMethod.POST)
-    public String processAddForm(){
+    public String processAddForm(@ModelAttribute("diagnosis") DiagnosisView diagnosis){
+        diagnosisFacade.addDiagnosis(diagnosis);
         
-        return null;
+        return "redirect:/patients/{patientId}";
     } 
     
-    @RequestMapping(value = "/patients/{patientId}/diagnosis/edit", method = RequestMethod.GET)
-    public String prepareEditForm(){
+    @RequestMapping(value = "/patients/{patientId}/diagnosis/{diagnosisId}/edit", method = RequestMethod.GET)
+    public String prepareEditForm(@PathVariable("diagnosisId") Long diagnosisId, 
+                                  @PathVariable("patientId") Long patientId, ModelMap map){
+        map.addAttribute("diagnosis", diagnosisFacade.getDiagnosis(diagnosisId));
+        map.addAttribute("patient", patientFacade.getPatient(patientId));
+        map.addAttribute("doctors", doctorFacade.getDoctors());
         
-        return null;
+        return "diagnosises/editOrAddDiagnosis";
     }
     
-    @RequestMapping(value = "/patients/{patientId}/diagnosis/edit", method = RequestMethod.POST)
-    public String processEditForm(){
+    @RequestMapping(value = "/patients/{patientId}/diagnosis/{diagnosisId}/edit", method = RequestMethod.POST)
+    public String processEditForm(@ModelAttribute("diagnosis") DiagnosisView diagnosis){
+        diagnosisFacade.updateDiagnosis(diagnosis);
         
-        return null;
+        return "redirect:/patients/{patientId}";
     }
     
-    @RequestMapping("/patient/{patientId}/diagnosis/delete")
-    public String deleteDiagnosis(){
+    @RequestMapping("/patients/{patientId}/diagnosis/{diagnosisId}/delete")
+    public String deleteDiagnosis(@PathVariable("diagnosisId") Long diagnosisId){
+        diagnosisFacade.deleteDiagnosis(diagnosisFacade.getDiagnosis(diagnosisId));
         
-        return null;
+        return "redirect:/patients/{patientId}";
     }
 }

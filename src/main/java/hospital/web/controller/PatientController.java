@@ -1,7 +1,5 @@
 package hospital.web.controller;
 
-import hospital.facade.DiagnosisFacade;
-import hospital.facade.DoctorFacade;
 import hospital.facade.InsurerFacade;
 import hospital.facade.PatientFacade;
 import hospital.view.PatientView;
@@ -29,12 +27,6 @@ public class PatientController {
     @Autowired
     private InsurerFacade insurerFacade;
     
-    @Autowired
-    private DiagnosisFacade diagnosisFacade;
-    
-    @Autowired
-    private DoctorFacade doctorFacade;
-    
     @RequestMapping("/patients")
     public String showAllPatients(ModelMap map){
         map.addAttribute("patientList", patientFacade.getPatients());
@@ -50,7 +42,7 @@ public class PatientController {
         map.addAttribute("patient", patientView);
         map.addAttribute("insurers", insurerFacade.getInsurers());
         
-        return "patients/editOrUpdatePatient";
+        return "patients/editOrAddPatient";
     }
     
     @RequestMapping(value = "/patients/new", method = RequestMethod.POST)
@@ -72,7 +64,7 @@ public class PatientController {
         map.addAttribute("patient", patientFacade.getPatient(patientId));
         map.addAttribute("insurers", insurerFacade.getInsurers());
         
-        return "patients/editOrUpdatePatient";
+        return "patients/editOrAddPatient";
     }
     
     @RequestMapping(value = "/patients/{patientId}/edit", method = RequestMethod.POST)

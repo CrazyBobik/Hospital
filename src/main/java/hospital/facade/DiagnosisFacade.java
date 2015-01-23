@@ -61,7 +61,7 @@ public class DiagnosisFacade {
             diagnosis = new Diagnosis();
         }
         diagnosis.setPatient(patientDAO.getPatient(dv.getPatientId()));
-        if (dv.getDoctorId() != null) {
+        if (dv.getDoctorId() != null && dv.getDoctorId() != 0) {
             diagnosis.setDoctor(doctorDAO.getDoctor(dv.getDoctorId()));
         } else {
             diagnosis.setDoctor(null);

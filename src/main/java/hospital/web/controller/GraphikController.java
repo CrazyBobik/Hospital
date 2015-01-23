@@ -28,7 +28,7 @@ public class GraphikController {
     private DoctorFacade doctorFacade;
     
     @RequestMapping(value = "/patints/{patientId}/graphiks")
-    public String showGraphiks(){
+    public String showGraphiksForPatient(){
         
         return null;
     }
