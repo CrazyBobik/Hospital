@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <html>
 <head>
   <title>Запись на прием</title>
@@ -17,17 +19,10 @@
   <font color="#dc143c"><h1 align="center">Запись на прием</h1></font>
 </div>
 
-<div style="float:left; width: 20%">
-  <p align="left">
-    <a href="/main"><b>Пациенты</b></a><br>
-    <a href="/doctors"><b>Доктора</b></a><br>
-    <a href="/insurers"><b>Страховщики</b></a><br>
-    <a href="/addGraphik"><b>Записатся на прием</b></a>
-  </p>
-</div>
+<jsp:include page="../parts/menu.jsp"/>
 
 <div style="float: left; width: 59%">
-  <form action="/addGraphik" method="post">
+  <form:form modelAttribute="graphik" method="post">
     <table align="center">
       <tr>
         <td>Пациент:</td>
@@ -39,7 +34,7 @@
           </select>
         </td>
       </tr>
-      
+
       <tr>
         <td>Доктор:</td>
         <td>
@@ -50,21 +45,21 @@
           </select>
         </td>
       </tr>
-      
+
       <tr>
         <td>Дата:</td>
         <td></td>
-        </tr>
-      
+      </tr>
+
       <tr>
         <td>
-          День: 
+          День:
           <select name="day">
             <c:forEach var="day" items="${days}">
               <option value="${day}">${day}</option>
             </c:forEach>
           </select>
-          </td>
+        </td>
         <td>
           Месяц:
           <select name="month">
@@ -74,14 +69,14 @@
           </select>
         </td>
       </tr>
-      
+
       <tr>
         <td>
           <input type="submit" value="OK" name="ok">
         </td>
       </tr>
     </table>
-  </form>
+  </form:form>
 </div>
 
 <div style="float: left; width: 20%"></div>

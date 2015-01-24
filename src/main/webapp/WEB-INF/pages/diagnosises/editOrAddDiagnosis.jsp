@@ -63,11 +63,8 @@
         </td>
       </tr>
       <tr>
-        <td>
+        <td colspan="2">
           <input type="submit" value="OK" name="ok">
-        </td>
-        <td>
-          <input type="submit" value="Отмена" name="cancel">
         </td>
       </tr>
     </table>

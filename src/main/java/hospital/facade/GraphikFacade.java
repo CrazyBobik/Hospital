@@ -6,6 +6,9 @@ import hospital.DAO.interfaceDAO.PatientDAO;
 import hospital.entity.Graphik;
 import hospital.view.GraphikView;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  * Created on 04.01.2015.
  *
@@ -56,7 +59,14 @@ public class GraphikFacade {
         } else {
             graphik = new Graphik();
         }
-        graphik.setDate(gv.getDate());
+        if (gv.getDay() != null){
+            Calendar calendar = new GregorianCalendar();
+            calendar.set(Calendar.MONTH, gv.getMonth());
+            calendar.set(Calendar.DAY_OF_MONTH, gv.getDay());
+            graphik.setDate(calendar.getTime());
+        } else {
+            graphik.setDate(gv.getDate());
+        }
         graphik.setPatient(patientDAO.getPatient(gv.getPatientId()));
         graphik.setDoctor(doctorDAO.getDoctor(gv.getDoctorId()));
         
