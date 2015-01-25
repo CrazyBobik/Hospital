@@ -59,14 +59,7 @@ public class GraphikFacade {
         } else {
             graphik = new Graphik();
         }
-        if (gv.getDay() != null){
-            Calendar calendar = new GregorianCalendar();
-            calendar.set(Calendar.MONTH, gv.getMonth());
-            calendar.set(Calendar.DAY_OF_MONTH, gv.getDay());
-            graphik.setDate(calendar.getTime());
-        } else {
-            graphik.setDate(gv.getDate());
-        }
+        graphik.setDate(gv.getDate());
         graphik.setPatient(patientDAO.getPatient(gv.getPatientId()));
         graphik.setDoctor(doctorDAO.getDoctor(gv.getDoctorId()));
         

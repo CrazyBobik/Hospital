@@ -2,6 +2,7 @@ package hospital.view;
 
 import hospital.entity.Graphik;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -21,8 +22,7 @@ public class GraphikView {
     private String doctorName;
     private String doctorPost;
     private Date date;
-    private Integer day;
-    private Integer month;
+    private String formatDate;
 
     public GraphikView() {
     }
@@ -36,6 +36,9 @@ public class GraphikView {
         this.doctorName = g.getDoctor().getFio();
         this.doctorPost = g.getDoctor().getPost();
         this.date = g.getDate();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        this.formatDate = dateFormat.format(this.date);
     }
 
     public Long getGraphikId() {
@@ -94,19 +97,7 @@ public class GraphikView {
         this.date = date;
     }
 
-    public Integer getDay() {
-        return day;
-    }
-
-    public void setDay(Integer day) {
-        this.day = day;
-    }
-
-    public Integer getMonth() {
-        return month;
-    }
-
-    public void setMonth(Integer month) {
-        this.month = month;
+    public String getFormatDate() {
+        return formatDate;
     }
 }

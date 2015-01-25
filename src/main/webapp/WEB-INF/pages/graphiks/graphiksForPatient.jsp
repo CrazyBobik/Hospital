@@ -35,7 +35,7 @@
         <td>${graphik.doctorName}</td>
         <td>${graphik.fio}</td>
         <td>
-          <c:out value="${graphik.date}"/>
+          <c:out value="${graphik.formatDate}"/>
           <spring:url value="/patients/{patientId}/graphiks/{graphikId}/delete.html" var="deleteGraphik">
             <spring:param name="patientId" value="${patient.patientId}"/>
             <spring:param name="graphikId" value="${graphik.graphikId}"/>

@@ -36,8 +36,6 @@ public class GraphikController {
     public String prepareAddGraphik(ModelMap map){
         map.addAttribute("patients", patientFacade.getPatients());
         map.addAttribute("doctors", doctorFacade.getDoctors());
-        map.addAttribute("days", getDays());
-        map.addAttribute("months", getMonths());
         
         return "graphiks/addGraphik";
     }
@@ -61,23 +59,5 @@ public class GraphikController {
         graphikFacade.deleteGraphik(graphikFacade.getGraphik(graphikId));
         
         return "redirect:/patients/{patientId}/graphiks";
-    }
-    
-    private int[] getDays(){
-        int[] days = new int[31];
-        for (int i = 0; i < 31; i++) {
-            days[i] = i + 1;
-        }
-        
-        return days;
-    }
-    
-    private int[] getMonths(){
-        int[] months = new int[12];
-        for (int i = 0; i < 12; i++) {
-            months[i] = i;
-        }
-        
-        return months;
     }
 }

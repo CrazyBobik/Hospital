@@ -73,5 +73,7 @@
     <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-tx:4.1.4.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-jdbc:4.1.4.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-test:4.1.4.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: joda-time:joda-time:2.7" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: joda-time:joda-time-jsptags:1.1.1" level="project" />
   </component>
 </module>

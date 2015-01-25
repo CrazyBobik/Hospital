@@ -48,25 +48,8 @@
 
       <tr>
         <td>Дата:</td>
-        <td></td>
-      </tr>
-
-      <tr>
         <td>
-          День:
-          <select name="day">
-            <c:forEach var="day" items="${days}">
-              <option value="${day}">${day}</option>
-            </c:forEach>
-          </select>
-        </td>
-        <td>
-          Месяц:
-          <select name="month">
-            <c:forEach var="month" items="${months}">
-              <option value="${month}">${month + 1}</option>
-            </c:forEach>
-          </select>
+          <input type="date" name="date" pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}" placeholder="2014/12/31">
         </td>
       </tr>
 
