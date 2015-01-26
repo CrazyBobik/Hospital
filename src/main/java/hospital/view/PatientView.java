@@ -37,7 +37,7 @@ public class PatientView {
         this.patientId = p.getPatientId();
         this.fio = p.getFio();
         if (p.getAddress() == null || p.getAddress().equals("")) {
-            this.address = "Не указано";
+            this.address = "Не указан";
         } else {
             this.address = p.getAddress();
         }
