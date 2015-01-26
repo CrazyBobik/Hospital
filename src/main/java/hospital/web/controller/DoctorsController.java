@@ -1,88 +1,70 @@
-//package hospital.web.controller;
-//
-//import hospital.facade.DoctorFacade;
-//import hospital.view.DoctorView;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.ModelMap;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//
-///**
-// * Created on 29.12.2014.
-// *
-// * @author Crazy Bobik
-// *         (.)(.)
-// *         =)
-// */
-//@Controller
-//public class DoctorsController {
-//
-//    @Autowired
-//    private DoctorFacade doctorFacade;
-//
-//    @RequestMapping("/doctors")
-//    public String printAllDoctors(@RequestParam(value = "doctorId", required = false) Long doctorId,
-//                                  @RequestParam(value = "graphik", required = false) Object graphik,
-//                                  @RequestParam(value = "del", required = false) Object del,
-//                                  @RequestParam(value = "edit", required = false) Object edit,
-//                                  @RequestParam(value = "add", required = false) Object add, ModelMap map){
-//        if (graphik != null){
-//            try {
-//                map.addAttribute("doctor", doctorFacade.getDoctor(doctorId));
-//
-//                return "graphiks/graphikDoctor";
-//            } catch (Exception e) {
-//
-//            }
-//        } else if (del != null){
-//            try {
-//                doctorFacade.deleteDoctor(doctorFacade.getDoctor(doctorId));
-//            } catch (Exception e){
-//
-//            }
-//        } else if (edit != null){
-//            try {
-//                map.addAttribute("doctor", doctorFacade.getDoctor(doctorId));
-//
-//                return "doctors/editDoctor";
-//            } catch (Exception e){
-//
-//            }
-//        } else if (add != null){
-//            DoctorView d = new DoctorView();
-//            d.setDoctorId(0l);
-//            map.addAttribute("doctor", d);
-//
-//            return "doctors/editDoctor";
-//        }
-//
-//        map.addAttribute("doctorList", doctorFacade.getDoctors());
-//
-//        return "doctors/doctors";
-//    }
-//
-//    @RequestMapping("/editDoctor")
-//    public String edit(@RequestParam(value = "doctorId") Long doctorId,
-//                       @RequestParam(value = "fio") String fio,
-//                       @RequestParam(value = "post") String post,
-//                       @RequestParam(value = "ok", required = false) Object ok, ModelMap map){
-//
-//        if (doctorId != null && ok != null){
-//            DoctorView d = new DoctorView();
-//            d.setDoctorId(doctorId);
-//            d.setFio(fio.trim());
-//            d.setPost(post.trim());
-//
-//            if (doctorId > 0){
-//                doctorFacade.updateDoctor(d);
-//            } else {
-//                doctorFacade.addDoctor(d);
-//            }
-//        }
-//
-//        map.addAttribute("doctorList", doctorFacade.getDoctors());
-//
-//        return "doctors/doctors";
-//    }
-//}
+package hospital.web.controller;
+
+import hospital.facade.DoctorFacade;
+import hospital.view.DoctorView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+/**
+* Created on 29.12.2014.
+*
+* @author Crazy Bobik
+*         (.)(.)
+*         =)
+*/
+@Controller
+public class DoctorsController {
+
+    @Autowired
+    private DoctorFacade doctorFacade;
+    
+    @RequestMapping("/doctors")
+    public String showDoctors(ModelMap map){
+        map.addAttribute("doctorList", doctorFacade.getDoctors());
+        
+        return "doctors/doctors";
+    }
+    
+    @RequestMapping(value = "/doctors/new", method = RequestMethod.GET)
+    public String prepareAddDoctor(ModelMap map){
+        DoctorView d = new DoctorView();
+        d.setDoctorId(0L);
+        
+        map.addAttribute("doctor", d);
+        
+        return "doctors/editOrAddDoctor";
+    }
+    
+    @RequestMapping(value = "/doctors/new", method = RequestMethod.POST)
+    public String processAddDoctor(@ModelAttribute("doctor") DoctorView doctor){
+        doctorFacade.addDoctor(doctor);
+        
+        return "redirect:/doctors";
+    }
+    
+    @RequestMapping(value = "/doctors/{doctorId}/edit", method = RequestMethod.GET)
+    public String prepareEditDoctor(@PathVariable Long doctorId, ModelMap map){
+        map.addAttribute("doctor", doctorFacade.getDoctor(doctorId));
+        
+        return "doctors/editOrAddDoctor";
+    }
+    
+    @RequestMapping(value = "/doctors/{doctorId}/edit", method = RequestMethod.POST)
+    public String processEditDoctor(@ModelAttribute("doctor") DoctorView doctor){
+        doctorFacade.addDoctor(doctor);
+        
+        return "redirect:/doctors";
+    }
+    
+    @RequestMapping("/doctors/{doctorId}/delete")
+    public String deleteDoctor(@PathVariable Long doctorId){
+        doctorFacade.deleteDoctor(doctorFacade.getDoctor(doctorId));
+        
+        return "redirect:/doctors";
+    }
+}

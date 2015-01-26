@@ -60,4 +60,11 @@ public class GraphikController {
         
         return "redirect:/patients/{patientId}/graphiks";
     }
+    
+    @RequestMapping("/doctors/{doctorId}/graphiks")
+    public String showGraphiksForDoctor(@PathVariable Long doctorId, ModelMap map){
+        map.addAttribute("doctor", doctorFacade.getDoctor(doctorId));
+        
+        return "graphiks/graphiksForDoctor";
+    }
 }
