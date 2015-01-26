@@ -56,7 +56,7 @@ public class DoctorsController {
     
     @RequestMapping(value = "/doctors/{doctorId}/edit", method = RequestMethod.POST)
     public String processEditDoctor(@ModelAttribute("doctor") DoctorView doctor){
-        doctorFacade.addDoctor(doctor);
+        doctorFacade.updateDoctor(doctor);
         
         return "redirect:/doctors";
     }

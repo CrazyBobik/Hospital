@@ -1,86 +1,71 @@
-//package hospital.web.controller;
-//
-//import hospital.facade.InsurerFacade;
-//import hospital.view.InsurerView;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.ModelMap;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//
-///**
-// * Created on 30.12.2014.
-// *
-// * @author Crazy Bobik
-// *         (.)(.)
-// *         =)
-// */
-//
-//@Controller
-//public class InsurerController {
-//
-//    @Autowired
-//    private InsurerFacade insurerFacade;
-//
-//    @RequestMapping("/insurers")
-//    public String printAllInsurers(@RequestParam(value = "insurerId", required = false) Long insurerId,
-//                                   @RequestParam(value = "del", required = false) Object del,
-//                                   @RequestParam(value = "edit", required = false) Object edit,
-//                                   @RequestParam(value = "add", required = false) Object add, ModelMap map){
-//
-//        if (del != null){
-//            try{
-//                insurerFacade.deleteInsurer(insurerFacade.getInsurer(insurerId));
-//            } catch (Exception e){
-//
-//            }
-//        } else if (edit != null){
-//            try {
-//                map.addAttribute("insurer", insurerFacade.getInsurer(insurerId));
-//
-//                return "insurers/editInsurer";
-//            } catch (Exception e){
-//
-//            }
-//        } else if (add != null){
-//            InsurerView i = new InsurerView();
-//            i.setInsurerId(0l);
-//
-//            map.addAttribute("insurer", i);
-//
-//            return "insurers/editInsurer";
-//        }
-//
-//        map.addAttribute("insurerList", insurerFacade.getInsurers());
-//
-//        return "insurers/insurers";
-//    }
-//
-//    @RequestMapping("editInsurer")
-//    public String edit(@RequestParam(value = "insurerId") Long insurerId,
-//                       @RequestParam(value = "name") String name,
-//                       @RequestParam(value = "contacts", required = false) String contacts,
-//                       @RequestParam(value = "ok", required = false) Object ok, ModelMap map){
-//
-//        if (insurerId != null && ok != null){
-//            InsurerView i = new InsurerView();
-//            i.setInsurerId(insurerId);
-//            i.setName(name.trim());
-//            if (contacts.equals("")){
-//                i.setContacts(null);
-//            } else {
-//                i.setContacts(contacts.trim());
-//            }
-//
-//            if (insurerId > 0){
-//                insurerFacade.updateInsurer(i);
-//            } else {
-//                insurerFacade.addInsurer(i);
-//            }
-//        }
-//
-//        map.addAttribute("insurerList", insurerFacade.getInsurers());
-//
-//        return "insurers/insurers";
-//    }
-//}
+package hospital.web.controller;
+
+import hospital.facade.InsurerFacade;
+import hospital.view.InsurerView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+/**
+* Created on 30.12.2014.
+*
+* @author Crazy Bobik
+*         (.)(.)
+*         =)
+*/
+
+@Controller
+public class InsurerController {
+
+    @Autowired
+    private InsurerFacade insurerFacade;
+
+    @RequestMapping("/insurers")
+    public String showInsurers(ModelMap map){
+        map.addAttribute("insurerList", insurerFacade.getInsurers());
+        
+        return "insurers/insurers";
+    }
+    
+    @RequestMapping(value = "/insurers/new", method = RequestMethod.GET)
+    public String prepareAddInsurer(ModelMap map){
+        InsurerView i = new InsurerView();
+        i.setInsurerId(0L);
+        
+        map.addAttribute("insurer", i);
+        
+        return "insurers/editOrAddInsurer";
+    }
+    
+    @RequestMapping(value = "/insurers/new", method = RequestMethod.POST)
+    public String processAddInsurer(@ModelAttribute InsurerView insurer){
+        insurerFacade.addInsurer(insurer);
+        
+        return "redirect:/insurers";
+    }
+    
+    @RequestMapping(value = "/insurers/{insurerId}/edit", method = RequestMethod.GET)
+    public String prepareEditInsurer(@PathVariable Long insurerId, ModelMap map){
+        map.addAttribute("insurer", insurerFacade.getInsurer(insurerId));
+        
+        return "insurers/editOrAddInsurer";
+    }
+    
+    @RequestMapping(value = "/insurers/{insurerId}/edit", method = RequestMethod.POST)
+    public String processEditInsurer(@ModelAttribute InsurerView insurer){
+        insurerFacade.updateInsurer(insurer);
+        
+        return "redirect:/insurers";
+    }
+    
+    @RequestMapping("/insurers/{insurerId}/delete")
+    public String deleteInsurer(@PathVariable Long insurerId){
+        insurerFacade.deleteInsurer(insurerFacade.getInsurer(insurerId));
+        
+        return "redirect:/insurers";
+    }
+}
