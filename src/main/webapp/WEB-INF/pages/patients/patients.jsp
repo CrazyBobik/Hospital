@@ -13,6 +13,10 @@
 <html>
 <head>
   <title>Електронные карточки пациентов</title>
+
+  <spring:url value="/webjars/bootstrap/2.3.0/css/bootstrap.min.css" var="bootstrapCss"/>
+  <link href="${bootstrapCss}" rel="stylesheet"/>
+  
 </head>
 <body bgcolor="#ffe4c4">
 
@@ -26,7 +30,7 @@
   
     <p align="right">
       <spring:url value="patients/new.html" var="addURL"/>
-      <a href="${fn:escapeXml(addURL)}">Добавить пациента</a>
+      <a href="${fn:escapeXml(addURL)}" class="btn btn-success">Добавить пациента</a>
     </p>
   
     <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%" align="center">
