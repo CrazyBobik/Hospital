@@ -8,25 +8,29 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
 <head>
   <title>Запись на прием</title>
-</head>
-<body bgcolor="#ffe4c4">
 
-<div>
-  <font color="#dc143c"><h1 align="center">Запись на прием</h1></font>
-</div>
+  <jsp:include page="../parts/css.jsp"/>
+  
+</head>
+<body>
+
+<jsp:include page="../parts/head.jsp"/>
 
 <jsp:include page="../parts/menu.jsp"/>
 
 <div style="float: left; width: 59%">
+    <font color="#ff4500"><h1 align="center">Запись на прием</h1></font>
+    
   <form:form modelAttribute="graphik" method="post">
-    <table align="center">
+    <table class="table table-striped">
       <tr>
-        <td>Пациент:</td>
-        <td>
+        <td width="40%">Пациент:</td>
+        <td width="60%">
           <select name="patientId">
             <c:forEach var="patient" items="${patients}">
               <option value="${patient.patientId}">${patient.fio}</option>
@@ -49,13 +53,14 @@
       <tr>
         <td>Дата:</td>
         <td>
-          <input type="date" name="date" pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}" placeholder="2014/12/31">
+          <input type="date" maxlength="10" name="date" pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}"
+                 placeholder="2014/12/31">
         </td>
       </tr>
 
       <tr>
-        <td>
-          <input type="submit" value="OK" name="ok">
+        <td colspan="2" align="center">
+          <input type="submit" value="OK" name="ok" class="btn btn-success">
         </td>
       </tr>
     </table>
@@ -64,5 +69,6 @@
 
 <div style="float: left; width: 20%"></div>
 
+<jsp:include page="../parts/footer.jsp"/>
 </body>
 </html>

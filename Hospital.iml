@@ -75,7 +75,7 @@
     <orderEntry type="library" exported="" name="Gradle: org.springframework:spring-test:4.1.4.RELEASE" level="project" />
     <orderEntry type="library" exported="" name="Gradle: joda-time:joda-time:2.7" level="project" />
     <orderEntry type="library" exported="" name="Gradle: joda-time:joda-time-jsptags:1.1.1" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.webjars:bootstrap:2.3.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.webjars:jquery:1.9.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.webjars:bootstrap:3.3.2" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.webjars:jquery:1.11.1" level="project" />
   </component>
 </module>

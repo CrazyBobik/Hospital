@@ -12,58 +12,65 @@
 
 <html>
 <head>
-  <title>Страховщики</title>
-</head>
-<body bgcolor="#ffe4c4">
+    <title>Страховщики</title>
+    
+    <jsp:include page="../parts/css.jsp"/>
 
-<div>
-  <font color="#dc143c"><h1 align="center">Страховщики</h1></font>
-</div>
+</head>
+<body>
+
+<jsp:include page="../parts/head.jsp"/>
 
 <jsp:include page="../parts/menu.jsp"/>
 
 <div style="float: left; width: 59%">
-
-  <p align="right">
-    <spring:url value="/insurers/new.html" var="newInsurer"/>
-    <a href="${fn:escapeXml(newInsurer)}">Добавить страховщика</a>
-  </p>
-
-  <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%" align="center">
-    <tr>
-      <th width="50%">Имя</th>
-      <th width="50%">Контакты</th>
-    </tr>
-    <c:forEach var="insurer" items="${insurerList}">
-      <tr>
-        <td>
-          <table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
+    <font color="#ff4500"><h1 align="center">Страховщики</h1></font>
+  
+    <table class="table table-striped">
+        <tr>
+            <th width="65%">Имя</th>
+            <th width="35%">Контакты</th>
+        </tr>
+        <c:forEach var="insurer" items="${insurerList}">
             <tr>
-              <td rowspan="2" width="50%"><c:out value="${insurer.name}"/></td>
-              <td width="50%">
-                <spring:url value="/insurers/{insurerId}/edit.html" var="editInsurer">
-                  <spring:param name="insurerId" value="${insurer.insurerId}"/>
-                </spring:url>
-                <a href="${fn:escapeXml(editInsurer)}">Редактировать</a>
-              </td>
+                <td>
+                    <table class="table table-striped">
+                        <tr>
+                            <td rowspan="2" width="55%"><c:out value="${insurer.name}"/></td>
+                            <td width="45%">
+                                <spring:url value="/insurers/{insurerId}/edit.html" var="editInsurer">
+                                    <spring:param name="insurerId" value="${insurer.insurerId}"/>
+                                </spring:url>
+                                <a href="${fn:escapeXml(editInsurer)}" class="list-group-item list-group-item-success">
+                                    <span class="glyphicon glyphicon-pencil"/>
+                                    Редактировать
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <spring:url value="/insurers/{insurerId}/delete.html" var="deleteInsurer">
+                                    <spring:param name="insurerId" value="${insurer.insurerId}"/>
+                                </spring:url>
+                                <a href="${fn:escapeXml(deleteInsurer)}" class="list-group-item list-group-item-danger">
+                                    <span class="glyphicon glyphicon-trash"/>
+                                    Удалить</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>${insurer.contacts}</td>
             </tr>
-            <tr>
-              <td>
-                <spring:url value="/insurers/{insurerId}/delete.html" var="deleteInsurer">
-                  <spring:param name="insurerId" value="${insurer.insurerId}"/>
-                </spring:url>
-                <a href="${fn:escapeXml(deleteInsurer)}">Удалить</a>
-              </td>
-            </tr>
-          </table>
-        </td>
-        <td>${insurer.contacts}</td>
-      </tr>
-    </c:forEach>
-  </table>
+        </c:forEach>
+    </table>
 </div>
 
-<div style="float: left; width: 20%"></div>
+<div style="float: left; width: 20%">
+    <p align="center">
+        <spring:url value="/insurers/new.html" var="newInsurer"/>
+        <a href="${fn:escapeXml(newInsurer)}" class="btn btn-primary">Добавить страховщика</a>
+    </p>
+</div>
 
 </body>
 </html>

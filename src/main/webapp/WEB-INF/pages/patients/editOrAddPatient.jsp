@@ -8,10 +8,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
 <head>
   <title>Пациент</title>
+
+  <spring:url value="/webjars/bootstrap/2.3.0/css/bootstrap.min.css" var="bootstrapCss"/>
+  <link href="${bootstrapCss}" rel="stylesheet"/>
+  
 </head>
 <body bgcolor="#ffe4c4">
 
@@ -24,7 +29,7 @@
 <div style="float:left; width: 59%">
   <form:form modelAttribute="patient" method="post">
     <input type="hidden" value="${patient.patientId}" name="patientId">
-    <table>
+    <table class="table table-striped">
       <tr>
         <td>Ф.И.О.:</td>
         <td>

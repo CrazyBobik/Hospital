@@ -12,50 +12,49 @@
 
 <html>
 <head>
-  <title>Електронные карточки пациентов</title>
+    <title>Електронные карточки пациентов</title>
 
-  <spring:url value="/webjars/bootstrap/2.3.0/css/bootstrap.min.css" var="bootstrapCss"/>
-  <link href="${bootstrapCss}" rel="stylesheet"/>
-  
+    <jsp:include page="../parts/css.jsp"/>
 </head>
-<body bgcolor="#ffe4c4">
+<body>
 
-<div>
-  <font color="#dc143c"><h1 align="center">Карточки пациентов</h1></font>
-</div>
+<jsp:include page="../parts/head.jsp"/>
 
 <jsp:include page="../parts/menu.jsp"/>
 
 <div style="float: left; width: 59%">
+    <font color="#ff4500"><h1 align="center">Карточки пациентов</h1></font>
   
-    <p align="right">
-      <spring:url value="patients/new.html" var="addURL"/>
-      <a href="${fn:escapeXml(addURL)}" class="btn btn-success">Добавить пациента</a>
-    </p>
-  
-    <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%" align="center">
-      <tr>
-        <th width="50%">Ф.И.О.</th>
-        <th width="25%">Адресс</th>
-        <th width="25%">Страховщик</th>
-      </tr>
-      <c:forEach var="patient" items="${patientList}">
+    <table class="table table-striped">
         <tr>
-          <td>
-            <spring:url value="/patients/{patientId}.html" var="patientURL">
-              <spring:param name="patientId" value="${patient.patientId}"/>
-            </spring:url>
-            <a href="${fn:escapeXml(patientURL)}"><c:out value="${patient.fio}"/></a>
-          </td>
-          <td>${patient.address}</td>
-          <td>${patient.insurerName}</td>
+            <th width="50%">Ф.И.О.</th>
+            <th width="25%">Адресс</th>
+            <th width="25%">Страховщик</th>
         </tr>
-      </c:forEach>
+        <c:forEach var="patient" items="${patientList}">
+            <tr>
+                <td>
+                    <spring:url value="/patients/{patientId}.html" var="patientURL">
+                        <spring:param name="patientId" value="${patient.patientId}"/>
+                    </spring:url>
+                    <a href="${fn:escapeXml(patientURL)}"><c:out value="${patient.fio}"/></a>
+                </td>
+                <td>${patient.address}</td>
+                <td>${patient.insurerName}</td>
+            </tr>
+        </c:forEach>
     </table>
 
 </div>
 
-<div style="float: left; width: 20%"></div>
+<div style="float: left; width: 20%">
+    <p align="center">
+        <spring:url value="patients/new.html" var="addURL"/>
+        <a href="${fn:escapeXml(addURL)}" class="btn btn-primary">Добавить пациента</a>
+    </p>
+</div>
+
+<jsp:include page="../parts/footer.jsp"/>
 
 </body>
 </html>
