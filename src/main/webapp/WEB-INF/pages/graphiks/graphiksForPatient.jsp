@@ -12,42 +12,56 @@
 
 <html>
 <head>
-  <title>Запись на прием</title>
+    <title>Запись на прием</title>
+    
+    <jsp:include page="../parts/css.jsp"/>
 </head>
-<body bgcolor="#ffe4c4">
+<body>
 
-<div>
-  <font color="#dc143c"><h1 align="center">Запись на прием</h1></font>
-</div>
+<jsp:include page="../parts/head.jsp"/>
 
 <jsp:include page="../parts/menu.jsp"/>
 
 <div style="float: left; width: 59%">
-  <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%"
-         align="center">
-    <tr>
-      <th width="35%">Доктор</th>
-      <th width="35%">Пациент</th>
-      <th width="30%">Дата</th>
-    </tr>
-    <c:forEach var="graphik" items="${patient.graphikViewList}">
-      <tr>
-        <td>${graphik.doctorName}</td>
-        <td>${graphik.fio}</td>
-        <td>
-          <c:out value="${graphik.formatDate}"/>
-          <spring:url value="/patients/{patientId}/graphiks/{graphikId}/delete.html" var="deleteGraphik">
-            <spring:param name="patientId" value="${patient.patientId}"/>
-            <spring:param name="graphikId" value="${graphik.graphikId}"/>
-          </spring:url>
-          <a href="${fn:escapeXml(deleteGraphik)}">Удалить</a>
-        </td>
-      </tr>
-    </c:forEach>
-  </table>
+    <font color="#ff4500"><h1 align="center">Запись на прием</h1></font>
+    
+    <table class="table table-striped">
+        <tr>
+            <th width="30%">Доктор</th>
+            <th width="35%">Пациент</th>
+            <th width="35%">Дата</th>
+        </tr>
+        <c:forEach var="graphik" items="${patient.graphikViewList}">
+            <tr>
+                <td>${graphik.doctorName}</td>
+                <td>${graphik.fio}</td>
+                <td>
+                    <table class="table table-striped">
+                        <tr>
+                            <td width="40%">
+                                <c:out value="${graphik.formatDate}"/>
+                            </td>
+                            <td width="60%">
+                                <spring:url value="/patients/{patientId}/graphiks/{graphikId}/delete.html" var="deleteGraphik">
+                                    <spring:param name="patientId" value="${patient.patientId}"/>
+                                    <spring:param name="graphikId" value="${graphik.graphikId}"/>
+                                </spring:url>
+                                <a href="${fn:escapeXml(deleteGraphik)}" class="list-group-item list-group-item-danger">
+                                    <span class="glyphicon glyphicon-trash"/>
+                                    Удалить
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
 
 <div style="float: left; width: 20%"></div>
+
+<jsp:include page="../parts/footer.jsp"/>
 
 </body>
 </html>

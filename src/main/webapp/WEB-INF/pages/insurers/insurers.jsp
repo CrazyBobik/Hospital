@@ -66,10 +66,13 @@
 </div>
 
 <div style="float: left; width: 20%">
-    <p align="center">
+    <div class="list-group">
         <spring:url value="/insurers/new.html" var="newInsurer"/>
-        <a href="${fn:escapeXml(newInsurer)}" class="btn btn-primary">Добавить страховщика</a>
-    </p>
+        <a href="${fn:escapeXml(newInsurer)}" class="list-group-item list-group-item-info">
+            <span class="glyphicon glyphicon-plus"/>
+            Добавить страховщика
+        </a>
+    </div>
 </div>
 
 </body>

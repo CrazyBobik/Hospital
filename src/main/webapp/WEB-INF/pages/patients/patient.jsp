@@ -13,103 +13,112 @@
 <html>
 <head>
     <title>Информация о пациенте</title>
+    
+    <jsp:include page="../parts/css.jsp"/>
 </head>
-<body bgcolor="#ffe4c4">
+<body>
 
-<div>
-  <font color="#dc143c"><h1 align="center">${patient.fio}</h1></font>
-</div>
+<jsp:include page="../parts/head.jsp"/>
 
 <jsp:include page="../parts/menu.jsp"/>
 
 <div style="float:left; width: 59%">
-  <table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
-    <tr>
-      <td width="50%">
-        <spring:url value="/patients/{patientId}/edit.html" var="editPatient">
-          <spring:param name="patientId" value="${patient.patientId}"/>
-        </spring:url>
-        <a href="${fn:escapeXml(editPatient)}">Редактировать пациента</a>
-      </td>
-      <td width="50%" align="right">
-        <spring:url value="/patients/{patientId}/delete.html" var="deletePatient">
-          <spring:param name="patientId" value="${patient.patientId}"/>
-        </spring:url>
-        <a href="${fn:escapeXml(deletePatient)}">Удалить пациента</a>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <dl>
-          <dt><b>Адресс:</b></dt>
-          <dd>${patient.address}</dd>
-          <dt><b>Контакты:</b></dt>
-          <dd>${patient.contacts}</dd>
-          <dt><b>Страховщик:</b></dt>
-          <dd>${patient.insurerName}</dd>
-        </dl>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <spring:url value="/patients/{patientId}/graphiks.html" var="showGraphiks">
-          <spring:param name="patientId" value="${patient.patientId}"/>
-        </spring:url>
-        <a href="${fn:escapeXml(showGraphiks)}">График приемов</a>
-      </td>
-      <td align="right">
-        <spring:url value="/patients/{patientId}/diagnosis/new.html" var="addDiagnosis">
-          <spring:param name="patientId" value="${patient.patientId}"/>
-        </spring:url>
-        <a href="${fn:escapeXml(addDiagnosis)}">Добавить диагноз</a>
-      </td>
-    </tr>
-  </table>
+    <font color="#ff4500"><h1 align="center">${patient.fio}</h1></font>
+    
+    <ul>
+        <dt><b>Адресс:</b></dt>
+        <dd>${patient.address}</dd>
+        <dt><b>Контакты:</b></dt>
+        <dd>${patient.contacts}</dd>
+        <dt><b>Страховщик:</b></dt>
+        <dd>${patient.insurerName}</dd>
+    </ul>
+
   
-  <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%" align="center">
-    <tr>
-      <th width="30%">Диагноз</th>
-      <th width="50%">Описание диагноза</th>
-      <th width="20%">Доктор</th>
-    </tr>
-    <c:forEach var="diagnosis" items="${patient.diagnosisViewList}">
-      <tr>
-        <td>
-            <table cellpadding="0" cellspacing="0" border="0" width="100%" align="center">
-              <tr>
-                <td rowspan="2" width="50%">${diagnosis.name}</td>
-                <td width="50%">
-                  <spring:url value="/patients/{patientId}/diagnosis/{diagnosisId}/edit.html" var="editDiagnosis">
-                    <spring:param name="patientId" value="${patient.patientId}"/>
-                    <spring:param name="diagnosisId" value="${diagnosis.diagnosisId}"/>
-                  </spring:url>
-                  <a href="${fn:escapeXml(editDiagnosis)}">Редактировать</a>
-                </td>
-              </tr>
-              <tr>
+    <table class="table table-striped">
+        <tr>
+            <th width="40%">Диагноз</th>
+            <th width="45%">Описание диагноза</th>
+            <th width="20%">Доктор</th>
+        </tr>
+        <c:forEach var="diagnosis" items="${patient.diagnosisViewList}">
+            <tr>
                 <td>
-                  <spring:url value="/patients/{patientId}/diagnosis/{diagnosisId}/delete.html" var="deleteDiagnosis">
-                    <spring:param name="patientId" value="${patient.patientId}"/>
-                    <spring:param name="diagnosisId" value="${diagnosis.diagnosisId}"/>
-                  </spring:url>
-                  <a href="${fn:escapeXml(deleteDiagnosis)}">Удалить</a>
+                    <table class="table table-striped">
+                        <tr>
+                            <td rowspan="2" width="40%">${diagnosis.name}</td>
+                            <td width="60%">
+                                <spring:url value="/patients/{patientId}/diagnosis/{diagnosisId}/edit.html" var="editDiagnosis">
+                                    <spring:param name="patientId" value="${patient.patientId}"/>
+                                    <spring:param name="diagnosisId" value="${diagnosis.diagnosisId}"/>
+                                </spring:url>
+                                <a href="${fn:escapeXml(editDiagnosis)}" class="list-group-item list-group-item-success">
+                                    <span class="glyphicon glyphicon-pencil"/>
+                                    Редактировать
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <spring:url value="/patients/{patientId}/diagnosis/{diagnosisId}/delete.html" var="deleteDiagnosis">
+                                    <spring:param name="patientId" value="${patient.patientId}"/>
+                                    <spring:param name="diagnosisId" value="${diagnosis.diagnosisId}"/>
+                                </spring:url>
+                                <a href="${fn:escapeXml(deleteDiagnosis)}" class="list-group-item list-group-item-danger">
+                                    <span class="glyphicon glyphicon-trash"/>
+                                    Удалить
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
-              </tr>
-            </table>
-        </td>
-        <td>${diagnosis.text}</td>
-        <td>
-          <dl>
-            <dt>${diagnosis.doctorPost}</dt>
-            <dd>${diagnosis.doctorName}</dd>
-          </dl>
-        </td>
-      </tr>
-    </c:forEach>
-  </table>
+                <td>${diagnosis.text}</td>
+                <td>
+                        ${diagnosis.doctorName}<br>
+                    -${diagnosis.doctorPost}
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
 
-<div style="float: left; width: 20%"></div>
+<div style="float: left; width: 20%">
+    <spring:url value="/patients/{patientId}/graphiks.html" var="showGraphiks">
+        <spring:param name="patientId" value="${patient.patientId}"/>
+    </spring:url>
+    
+    <spring:url value="/patients/{patientId}/edit.html" var="editPatient">
+        <spring:param name="patientId" value="${patient.patientId}"/>
+    </spring:url>
+    
+    <spring:url value="/patients/{patientId}/diagnosis/new.html" var="addDiagnosis">
+        <spring:param name="patientId" value="${patient.patientId}"/>
+    </spring:url>
+    
+    <spring:url value="/patients/{patientId}/delete.html" var="deletePatient">
+        <spring:param name="patientId" value="${patient.patientId}"/>
+    </spring:url>
+    
+    <div class="list-group">
+        <a href="${fn:escapeXml(showGraphiks)}" class="list-group-item list-group-item-info">
+            <span class="glyphicon glyphicon-calendar"/>
+            График приемов
+        </a>
+        <a href="${fn:escapeXml(addDiagnosis)}" class="list-group-item list-group-item-info">
+            <span class="glyphicon glyphicon-plus"/>
+            Добавить диагноз
+        </a>
+        <a href="${fn:escapeXml(editPatient)}" class="list-group-item list-group-item-success">
+            <span class="glyphicon glyphicon-pencil"/>
+            Редактировать пациента
+        </a>
+        <a href="${fn:escapeXml(deletePatient)}" class="list-group-item list-group-item-danger">
+            <span class="glyphicon glyphicon-trash"/>
+            Удалить пациента
+        </a>
+    </div>
+</div>
 
+<jsp:include page="../parts/footer.jsp"/>
 </body>
 </html>

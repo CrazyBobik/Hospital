@@ -10,18 +10,22 @@
 <html>
 <head>
     <title>Запись на прием</title>
+    
+    <jsp:include page="../parts/css.jsp"/>
 </head>
-<body bgcolor="#ffe4c4">
+<body>
 
-<div>
-  <font color="#dc143c"><h1 align="center">Вы успешно записались на прием</h1></font>
-</div>
+<jsp:include page="../parts/head.jsp"/>
 
 <jsp:include page="../parts/menu.jsp"/>
 
-<div style="float: left; width: 59%"></div>
+<div class="alert alert-success" style="float: left; width: 59%">
+    <h1 align="center">Вы успешно записались на прием</h1>
+</div>
 
 <div style="float: left; width: 20%"></div>
+
+<jsp:include page="../parts/footer.jsp"/>
 
 </body>
 </html>

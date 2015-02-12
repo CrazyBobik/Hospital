@@ -13,22 +13,23 @@
 <html>
 <head>
   <title>Запись на прием</title>
+    
+    <jsp:include page="../parts/css.jsp"/>
 </head>
-<body bgcolor="#ffe4c4">
+<body>
 
-<div>
-  <font color="#dc143c"><h1 align="center">Запись на прием</h1></font>
-</div>
+<jsp:include page="../parts/head.jsp"/>
 
 <jsp:include page="../parts/menu.jsp"/>
 
 <div style="float: left; width: 59%">
-  <table bordercolor="#8b0000" bgcolor="#ffeedd" cellpadding="5" cellspacing="2" border="2" width="100%"
-         align="center">
+    <font color="#ff4500"><h1 align="center">Запись на прием</h1></font>
+    
+  <table class="table table-striped">
     <tr>
-      <th width="35%">Доктор</th>
+      <th width="30%">Доктор</th>
       <th width="35%">Пациент</th>
-      <th width="30%">Дата</th>
+      <th width="35%">Дата</th>
     </tr>
     <c:forEach var="graphik" items="${doctor.graphikViewList}">
       <tr>
@@ -42,6 +43,7 @@
 
 <div style="float: left; width: 20%"></div>
 
+<jsp:include page="../parts/footer.jsp"/>
 </body>
 </html>
 

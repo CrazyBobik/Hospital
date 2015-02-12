@@ -12,19 +12,21 @@
 <html>
 <head>
   <title>Доктор</title>
+    
+    <jsp:include page="../parts/css.jsp"/>
 </head>
-<body bgcolor="#ffe4c4">
+<body>
 
-<div>
-  <font color="#dc143c"><h1 align="center">Введите данные доктора</h1></font>
-</div>
+<jsp:include page="../parts/head.jsp"/>
 
 <jsp:include page="../parts/menu.jsp"/>
 
 <div style="float:left; width: 59%">
+    <font color="#ff4500"><h1 align="center">Введите данные доктора</h1></font>
+    
   <form:form modelAttribute="doctor" method="post">
     <input type="hidden" value="${doctor.doctorId}" name="doctorId">
-    <table align="center">
+    <table class="table table-striped">
       <tr>
         <td>Ф.И.О.:</td>
         <td>
@@ -38,8 +40,8 @@
         </td>
       </tr>
       <tr>
-        <td colspan="2">
-          <input type="submit" value="OK" name="ok">
+        <td colspan="2" align="center">
+          <input type="submit" class="btn btn-success" value="OK" name="ok">
         </td>
       </tr>
     </table>
@@ -48,6 +50,6 @@
 
 <div style="float: left; width: 20%"></div>
 
-
+<jsp:include page="../parts/footer.jsp"/>
 </body>
 </html>

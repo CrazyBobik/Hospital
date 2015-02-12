@@ -48,10 +48,13 @@
 </div>
 
 <div style="float: left; width: 20%">
-    <p align="center">
+    <div class="list-group">
         <spring:url value="patients/new.html" var="addURL"/>
-        <a href="${fn:escapeXml(addURL)}" class="btn btn-primary">Добавить пациента</a>
-    </p>
+        <a href="${fn:escapeXml(addURL)}" class="list-group-item list-group-item-info">
+            <span class="glyphicon glyphicon-plus"/>
+            Добавить пациента
+        </a>
+    </div>
 </div>
 
 <jsp:include page="../parts/footer.jsp"/>

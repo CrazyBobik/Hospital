@@ -77,11 +77,15 @@
 </div>
 
 <div style="float: left; width: 20%">
-    <p align="center">
+    <div class="list-group">
         <spring:url value="/doctors/new.html" var="newDoctor"/>
-        <a href="${fn:escapeXml(newDoctor)}" class="btn btn-primary">Добавить доктора</a>
-    </p>
+        <a href="${fn:escapeXml(newDoctor)}" class="list-group-item list-group-item-info">
+            <span class="glyphicon glyphicon-plus"/>
+            Добавить доктора
+        </a>
+    </div>
 </div>
 
+<jsp:include page="../parts/footer.jsp"/>
 </body>
 </html>
