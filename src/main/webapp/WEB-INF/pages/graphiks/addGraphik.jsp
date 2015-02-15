@@ -53,7 +53,7 @@
       <tr>
         <td>Дата:</td>
         <td>
-          <input type="date" maxlength="10" name="date" pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}"
+          <input type="text" maxlength="10" name="date" pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}"
                  placeholder="2014/12/31">
         </td>
       </tr>
