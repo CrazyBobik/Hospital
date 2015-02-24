@@ -59,7 +59,7 @@ public class PatientView {
                 diagnosisViewList.add(new DiagnosisView(d));
             }
         }
-        
+
         if (fullG){
             graphikViewList = new LinkedList<GraphikView>();
             List<Graphik> graphikList = p.getGraphikList();
